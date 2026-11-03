@@ -1,0 +1,1189 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roshan CRM</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#113837">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>:root{
+  --bg:#F7F9F4; --surface:#FFFFFF; --surface-2:#FBFCF9;
+  --ink:#123E3C; --text:#2A3B3A; --muted:#677675; --faint:#97A3A2;
+  --line:#E2E8E1; --line-2:#EDF1EC;
+  --brand:#17494A; --brand-hover:#0F3B3C; --brand-deep:#113837; --brand-card:#1B4746;
+  --accent:#4DB848; --accent-ink:#2E8F33; --accent-soft:#E9F6E7;
+  --danger:#C2413B; --danger-soft:#FBEAE9; --warn:#C98A12; --warn-soft:#FCF3E1;
+  --radius:16px; --radius-sm:10px;
+  --shadow:0 10px 30px -12px rgba(18,62,60,.18);
+  --shadow-sm:0 2px 8px -2px rgba(18,62,60,.10);
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{color:var(--ink);margin:0;letter-spacing:-.02em;line-height:1.15}
+.script{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.dot{color:var(--accent)}
+.eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--surface)}
+.muted{color:var(--muted)} .small{font-size:12.5px} .nowrap{white-space:nowrap}
+.hidden{display:none!important}
+
+/* ---------- Buttons & inputs ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:12px;padding:10px 18px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap;text-decoration:none;font-size:14px}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px -10px rgba(23,73,74,.6)}
+.btn-primary:hover{background:var(--brand-hover)}
+.btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brand);}
+.btn-green{background:var(--accent);color:#fff}
+.btn-danger{background:var(--surface);border-color:#F0C9C6;color:var(--danger)}
+.btn-sm{padding:7px 12px;font-size:13px;border-radius:10px}
+.btn-xs{padding:4px 9px;font-size:12px;border-radius:8px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:13px;font-weight:600;color:var(--ink)}
+.field label .req{color:var(--danger)}
+.input,select.input,textarea.input{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;outline:none;transition:.15s}
+.input:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(77,184,72,.15)}
+textarea.input{resize:vertical;min-height:84px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.spacer{flex:1}
+
+/* ---------- Login ---------- */
+.login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;max-width:1240px;margin:0 auto;padding:40px 28px}
+.login h1{font-size:clamp(38px,5.2vw,64px);font-weight:700;letter-spacing:-.045em}
+.login .lead{font-size:17px;color:var(--muted);max-width:520px;margin:22px 0 26px}
+.ticks{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:center;color:var(--ink);font-weight:500}
+.tick{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow)}
+.logo{font-weight:700;font-size:24px;letter-spacing:-.03em;color:var(--ink)}
+.progress{height:4px;background:var(--line-2);border-radius:9px;overflow:hidden;margin:12px 0 20px}
+.progress>span{display:block;height:100%;background:var(--accent);border-radius:9px}
+.demo-roles{display:grid;gap:10px}
+.demo-role{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);cursor:pointer;transition:.15s}
+.demo-role:hover{border-color:var(--brand);background:#fff}
+.demo-role b{color:var(--ink);display:block}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.avatar.sm{width:28px;height:28px;font-size:11px}
+
+/* ---------- Shell ---------- */
+.shell{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.sidebar{background:var(--brand-deep);color:#CFE0DE;padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.sidebar .logo{color:#fff;padding:0 10px 4px;display:flex;align-items:baseline;gap:8px}
+.sidebar .logo small{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--accent);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:2px 8px}
+.ws{margin:16px 6px 10px;padding:10px 12px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04)}
+.ws label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#8FB0AD;font-weight:700}
+.ws select{width:100%;background:transparent;border:0;color:#fff;font-weight:600;padding:4px 0 0;outline:none;cursor:pointer}
+.ws select option{color:#123E3C}
+.ws .ws-name{color:#fff;font-weight:600;margin-top:2px}
+.nav-label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6F9592;font-weight:700;padding:14px 12px 6px}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:11px;color:#CFE0DE;text-decoration:none;font-weight:500;cursor:pointer;transition:.12s}
+.nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav a.active{background:var(--brand-card);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.nav a.active svg{color:var(--accent)}
+.nav a .count{margin-left:auto;background:var(--accent);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:1px 7px}
+.nav svg{width:18px;height:18px;flex:none}
+.side-foot{margin-top:auto;padding:12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center}
+.side-foot .who{flex:1;min-width:0}
+.side-foot .who b{color:#fff;display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-foot .who span{font-size:11.5px;color:#8FB0AD}
+.side-foot .icon-btn{background:transparent;border-color:rgba(255,255,255,.15);color:#CFE0DE}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(247,249,244,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 28px;display:flex;align-items:center;gap:14px}
+.topbar h2{font-size:22px;font-weight:700}
+.topbar .menu-btn{display:none}
+.demo-pill{font-size:11.5px;font-weight:600;color:var(--warn);background:var(--warn-soft);border-radius:999px;padding:4px 10px}
+.content{padding:26px 28px 60px;max-width:1400px;width:100%}
+
+/* ---------- Panels ---------- */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm)}
+.panel-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.panel-h h3{font-size:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.kpi .k-label{font-size:12.5px;color:var(--muted);font-weight:500}
+.kpi .k-val{font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-.03em;margin-top:4px}
+.kpi .k-sub{font-size:12px;color:var(--muted)}
+.kpi.dark{background:var(--brand-deep);border-color:var(--brand-deep)}
+.kpi.dark .k-label,.kpi.dark .k-sub{color:#9DBDBA}.kpi.dark .k-val{color:#fff}
+.cols{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.cols-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stack{display:grid;gap:18px;align-content:start}
+.cols,.cols-eq{align-items:start}
+
+/* ---------- Tables ---------- */
+.table-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+table.t{width:100%;border-collapse:collapse}
+.t th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:12px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.t td{padding:12px 14px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+.t tr:last-child td{border-bottom:0}
+.t tbody tr.click{cursor:pointer}
+.t tbody tr.click:hover{background:#F6FAF4}
+.t .name{font-weight:600;color:var(--ink)}
+.t .sub{font-size:12.5px;color:var(--muted)}
+.t input[type=checkbox]{width:16px;height:16px;accent-color:var(--brand)}
+.empty{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty h4{font-size:17px;margin-bottom:6px}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.s-new{background:#E7F0F8;color:#2C6CA8}
+.s-contacted{background:#E6F2F1;color:#1F6E6A}
+.s-interested{background:#FCF3E1;color:#A86F07}
+.s-follow_up{background:#EFEAFB;color:#6A49C4}
+.s-won{background:var(--accent-soft);color:var(--accent-ink)}
+.s-lost{background:var(--danger-soft);color:var(--danger)}
+.s-not_interested{background:#EFF1F0;color:#6B7675}
+.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--muted);background:var(--surface-2)}
+.tag.overdue{color:var(--danger);border-color:#F0C9C6;background:var(--danger-soft)}
+.tag.today{color:var(--warn);border-color:#F1DDB0;background:var(--warn-soft)}
+
+/* filters */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar .input{width:auto;min-width:150px;padding:9px 12px}
+.toolbar .search{min-width:240px;flex:1;max-width:360px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text)}
+.chip b{color:var(--ink);margin-left:4px}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.chip.on b{color:#fff}
+.bulkbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--brand-deep);color:#fff;border-radius:14px;padding:10px 14px;margin-bottom:12px}
+.bulkbar select{background:var(--brand-card);color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:6px 10px}
+.pager{display:flex;align-items:center;gap:10px;justify-content:flex-end;padding:12px 14px;border-top:1px solid var(--line-2);font-size:13px;color:var(--muted)}
+
+/* bars */
+.bars{display:grid;gap:10px}
+.bar-row{display:grid;grid-template-columns:120px 1fr 48px;gap:10px;align-items:center;font-size:13px}
+.bar-track{height:10px;background:var(--line-2);border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;background:var(--brand);border-radius:99px}
+.bar-fill.g{background:var(--accent)}
+.vchart{display:flex;align-items:flex-end;gap:6px;height:160px;padding-top:10px}
+.vchart .vb{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.vchart .vb span{width:100%;max-width:34px;background:var(--brand);border-radius:6px 6px 2px 2px;min-height:2px}
+.vchart .vb:last-child span{background:var(--accent)}
+.vchart .vb small{font-size:10.5px;color:var(--faint)}
+
+/* list items */
+.list{display:grid}
+.li{display:flex;gap:12px;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line-2);cursor:pointer}
+.li:last-child{border-bottom:0}
+.li .grow{flex:1;min-width:0}
+.li .grow b{color:var(--ink);font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- Drawer & modal ---------- */
+.overlay{position:fixed;inset:0;background:rgba(10,30,29,.38);z-index:50;animation:fade .15s}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);z-index:51;box-shadow:-20px 0 60px -20px rgba(0,0,0,.3);display:flex;flex-direction:column;animation:slide .2s ease-out}
+.drawer-h{padding:20px 22px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.drawer-b{padding:20px 22px;overflow-y:auto;flex:1}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100% - 28px));max-height:calc(100vh - 40px);overflow-y:auto;background:var(--surface);border-radius:22px;z-index:52;padding:26px;box-shadow:0 30px 80px -20px rgba(0,0,0,.35);animation:pop .18s ease-out}
+.modal.wide{width:min(820px,calc(100% - 28px))}
+.modal h3{font-size:20px;margin-bottom:4px}
+.modal-f{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+@keyframes fade{from{opacity:0}}@keyframes slide{from{transform:translateX(40px);opacity:.4}}@keyframes pop{from{transform:translate(-50%,-46%);opacity:0}}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.act{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);cursor:pointer;font-weight:600;color:var(--ink);text-decoration:none;font-size:13px}
+.act:hover{border-color:var(--accent)}
+.act svg{width:20px;height:20px;color:var(--accent-ink)}
+.timeline{display:grid;gap:0;position:relative}
+.tl{display:flex;gap:12px;padding:10px 0;position:relative}
+.tl .ic{width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;flex:none;font-size:12px}
+.tl .ic svg{width:14px;height:14px}
+.tl b{color:var(--ink);font-weight:600}
+.status-grid{display:flex;flex-wrap:wrap;gap:8px}
+.status-grid .pill{cursor:pointer;padding:6px 12px;border:1px solid transparent}
+.status-grid .pill.sel{border-color:currentColor;box-shadow:0 0 0 2px rgba(255,255,255,1),0 0 0 3px currentColor}
+.section-t{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 10px}
+
+/* upload */
+.drop{border:2px dashed var(--line);border-radius:18px;padding:34px;text-align:center;background:var(--surface);cursor:pointer;transition:.15s}
+.drop:hover,.drop.drag{border-color:var(--accent);background:#FAFDF8}
+.steps{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--faint)}
+.step .n{width:24px;height:24px;border-radius:50%;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:12px;background:#fff}
+.step.on{color:var(--ink)}.step.on .n{background:var(--brand);border-color:var(--brand);color:#fff}
+.step.done .n{background:var(--accent);border-color:var(--accent);color:#fff}
+.mode{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:14px;cursor:pointer;background:var(--surface)}
+.mode.on{border-color:var(--brand);box-shadow:0 0 0 3px rgba(23,73,74,.08)}
+.mode input{margin-top:3px;accent-color:var(--brand)}
+.mode b{color:var(--ink)}
+.dist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.dist{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);display:flex;gap:10px;align-items:center}
+.dist b{font-size:20px;color:var(--ink);display:block;line-height:1}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;background:#0F2E2D;color:#CDE7E3;border-radius:12px;padding:12px 14px;overflow-x:auto;white-space:pre;line-height:1.55}
+.copy-row{display:flex;gap:8px;align-items:center}
+.copy-row .input{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.switch{position:relative;width:40px;height:22px;flex:none;display:inline-block}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:#CBD5D3;border-radius:99px;cursor:pointer;transition:.15s}
+.switch span::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.15s}
+.switch input:checked+span{background:var(--accent)}
+.switch input:checked+span::after{transform:translateX(18px)}
+.note{background:var(--accent-soft);border:1px solid #CFEBCB;color:#24572A;border-radius:14px;padding:12px 14px;font-size:13.5px}
+.note.warn{background:var(--warn-soft);border-color:#F1DDB0;color:#7A560C}
+.toast-wrap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:99;display:grid;gap:8px}
+.toast{background:var(--ink);color:#fff;border-radius:12px;padding:11px 16px;font-weight:500;box-shadow:var(--shadow);animation:pop2 .2s}
+.toast.err{background:var(--danger)}
+@keyframes pop2{from{transform:translateY(10px);opacity:0}}
+.spinner{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:60px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){.cols,.cols-eq{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .login{grid-template-columns:1fr;gap:28px;padding:28px 16px}
+  .shell{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;z-index:60;transform:translateX(-100%);transition:.2s}
+  .sidebar.open{transform:none;box-shadow:20px 0 60px rgba(0,0,0,.3)}
+  .topbar{padding:12px 16px}.topbar .menu-btn{display:inline-flex}
+  .topbar h2{font-size:18px}
+  .content{padding:18px 16px 60px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .toolbar .search{max-width:none;min-width:100%}
+  /* tables become cards */
+  table.t.cards thead{display:none}
+  table.t.cards,table.t.cards tbody,table.t.cards tr,table.t.cards td{display:block;width:100%}
+  table.t.cards tr{padding:12px 14px;border-bottom:1px solid var(--line-2);position:relative}
+  table.t.cards td{border:0;padding:3px 0}
+  table.t.cards td[data-l]::before{content:attr(data-l)": ";font-size:12px;color:var(--faint)}
+  table.t.cards td.sno{display:none}
+  table.t.cards td.cb{position:absolute;right:14px;top:14px;width:auto}
+  .actions{grid-template-columns:repeat(3,1fr)}
+  .bar-row{grid-template-columns:90px 1fr 40px}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>/* =====================================================================
+   Roshan CRM — data layer
+   Two interchangeable back-ends with the SAME methods:
+     • SupaAPI  – real database (Supabase), used when config has a URL
+     • DemoAPI  – in-browser demo with sample data (for pitching / trying)
+   ===================================================================== */
+const STATUSES = [
+  ['new','Open'],['contacted','Contacted'],['interested','Interested'],['follow_up','Follow-up'],
+  ['won','Won'],['lost','Lost'],['not_interested','Not interested']];
+const STATUS_LABEL = Object.fromEntries(STATUSES);
+const SOURCE_KINDS = [['website','Website form'],['facebook','Facebook Lead Ads'],['google','Google Ads'],
+  ['indiamart','IndiaMART'],['tradeindia','TradeIndia'],['justdial','JustDial'],['api','Custom API'],['other','Other']];
+
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36));
+const nowISO = () => new Date().toISOString();
+
+/* ---------------------------------------------------------------- DEMO */
+const DEMO_KEY = 'roshan_crm_demo_v1';
+function makeSeed() {
+  const first = ['Aarav','Vivaan','Aditya','Ishaan','Rohan','Kabir','Arjun','Sai','Ananya','Diya','Priya','Neha','Pooja','Sneha','Kavya','Meera','Rahul','Amit','Vikram','Sanjay','Ritu','Nisha','Karan','Manish','Deepak','Simran','Tanvi','Harsh','Yash','Ayesha','Farhan','Gurpreet','Lakshmi','Suresh','Anjali'];
+  const last = ['Sharma','Verma','Gupta','Singh','Patel','Reddy','Iyer','Nair','Mehta','Kapoor','Joshi','Malhotra','Chopra','Bansal','Agarwal','Khan','Das','Rao','Pillai','Saxena'];
+  const cities = ['New Delhi','Gurugram','Noida','Mumbai','Pune','Bengaluru','Jaipur','Lucknow','Chandigarh','Hyderabad','Ahmedabad','Indore'];
+  const rnd = a => a[Math.floor(Math.random()*a.length)];
+  const t0 = Date.now();
+  const s = { orgs:[], users:[], leads:[], acts:[], sources:[], campaigns:[], seq:1 };
+  const su = { id:'u-roshan', org_id:null, role:'super_admin', full_name:'Roshan', email:'roshan@workwithroshan.com', phone:'', active:true, created_at:nowISO() };
+  s.users.push(su);
+  const mkOrg = (name, contact, email, max, execNames, plan) => {
+    const o = { id:uid(), name, contact_name:contact, email, phone:'98'+Math.floor(10000000+Math.random()*89999999), plan, max_executives:max, auto_assign:true, rr_cursor:0, active:true, created_at:new Date(t0-86400e3*40).toISOString() };
+    s.orgs.push(o);
+    s.users.push({ id:uid(), org_id:o.id, role:'client_admin', full_name:contact, email, phone:o.phone, active:true, created_at:o.created_at });
+    execNames.forEach((n,i) => s.users.push({ id:uid(), org_id:o.id, role:'executive', full_name:n, email:n.split(' ')[0].toLowerCase()+'@'+email.split('@')[1], phone:'9'+Math.floor(100000000+Math.random()*899999999), active:true, created_at:new Date(t0-86400e3*(30-i)).toISOString() }));
+    return o;
+  };
+  const o1 = mkOrg('Urban Bites Café','Rakesh Malhotra','rakesh@urbanbites.in',10,['Priya Sharma','Arjun Mehta','Sneha Iyer','Karan Kapoor','Neha Joshi'],'growth');
+  const o2 = mkOrg('GlowSkin Clinic','Dr. Meera Nair','meera@glowskin.in',5,['Ritu Bansal','Farhan Khan','Tanvi Rao'],'standard');
+  [[o1,'Website form','website'],[o1,'Facebook — Brunch offer','facebook'],[o1,'Google Ads','google'],
+   [o2,'Facebook — Free consult','facebook'],[o2,'IndiaMART','indiamart'],[o2,'Website form','website']]
+   .forEach(([o,n,k]) => s.sources.push({ id:uid(), org_id:o.id, name:n, kind:k, api_key:Array.from({length:36},()=>'0123456789abcdef'[Math.floor(Math.random()*16)]).join(''), active:true, created_at:o.created_at }));
+  const statusW = ['new','new','new','contacted','contacted','interested','follow_up','follow_up','won','lost','not_interested'];
+  [[o1,96],[o2,54]].forEach(([o,n]) => {
+    const execs = s.users.filter(u => u.org_id===o.id && u.role==='executive');
+    const srcs = s.sources.filter(x => x.org_id===o.id);
+    for (let i=0;i<n;i++) {
+      const created = new Date(t0 - Math.random()*86400e3*28 - (i<6 ? 0 : 3600e3)).toISOString();
+      const st = i<6 ? 'new' : rnd(statusW);
+      const ex = execs[i % execs.length];
+      const fn = rnd(first), ln = rnd(last);
+      let fu = null;
+      if (st==='follow_up' || st==='interested') { const d = new Date(); d.setHours(10+Math.floor(Math.random()*8),0,0,0); d.setDate(d.getDate()+Math.floor(Math.random()*5)-2); fu = d.toISOString(); }
+      const L = { id:uid(), org_id:o.id, name:fn+' '+ln, phone:'9'+Math.floor(100000000+Math.random()*899999999), email:(fn+'.'+ln).toLowerCase()+'@gmail.com', city:rnd(cities),
+        source:rnd(srcs).name, status:st, assigned_to:ex.id, assigned_at:created, next_followup:fu, deal_value: st==='won' ? (o===o1?2500:8000)*(1+Math.floor(Math.random()*4)) : null,
+        notes:'', extra:{}, created_by:null, created_at:created, updated_at:created };
+      s.leads.push(L);
+      s.acts.push({ id:s.seq++, lead_id:L.id, org_id:o.id, user_id:null, kind:'created', body:'Lead created from '+L.source, created_at:created });
+      s.acts.push({ id:s.seq++, lead_id:L.id, org_id:o.id, user_id:null, kind:'assign', body:'Assigned to '+ex.full_name, created_at:created });
+      if (st!=='new') s.acts.push({ id:s.seq++, lead_id:L.id, org_id:o.id, user_id:ex.id, kind:'status', body:'Status: new → '+st, created_at:new Date(Date.parse(created)+3600e3*3).toISOString() });
+    }
+    o.rr_cursor = n;
+  });
+  return s;
+}
+
+class DemoAPI {
+  constructor(){ this.mode='demo'; this.load(); }
+  load(){ try { this.s = JSON.parse(localStorage.getItem(DEMO_KEY)); } catch(e){ this.s=null; } if(!this.s){ this.s = makeSeed(); this.save(); } }
+  save(){ try { localStorage.setItem(DEMO_KEY, JSON.stringify(this.s)); } catch(e){} }
+  reset(){ this.s = makeSeed(); this.save(); }
+  get me(){ return this.s.users.find(u => u.id === this._me) || null; }
+  async session(){ let id=null; try{ id = localStorage.getItem(DEMO_KEY+'_me'); }catch(e){} this._me=id; return this.me; }
+  async demoLogin(userId){ this._me=userId; try{ localStorage.setItem(DEMO_KEY+'_me', userId);}catch(e){} return this.me; }
+  async signIn(email){ const u = this.s.users.find(x => x.email.toLowerCase()===String(email).toLowerCase() && x.active); if(!u) throw new Error('No demo user with that email'); return this.demoLogin(u.id); }
+  async signOut(){ this._me=null; try{ localStorage.removeItem(DEMO_KEY+'_me'); }catch(e){} }
+  demoUsers(){ return this.s.users; }
+  _orgScope(orgId){ const m=this.me; return m.role==='super_admin' ? orgId : m.org_id; }
+
+  async listOrgs(){ const m=this.me; return m.role==='super_admin' ? [...this.s.orgs] : this.s.orgs.filter(o=>o.id===m.org_id); }
+  async createClient(p){
+    if (this.me.role!=='super_admin') throw new Error('Not allowed');
+    if (!p.company || !p.email) throw new Error('Company and email are required');
+    if (this.s.users.some(u=>u.email.toLowerCase()===p.email.toLowerCase())) throw new Error('A login with this email already exists');
+    const o = { id:uid(), name:p.company, contact_name:p.contact_name, email:p.email, phone:p.phone, plan:p.plan||'standard', max_executives:+p.max_executives||10, auto_assign:true, rr_cursor:0, active:true, created_at:nowISO() };
+    this.s.orgs.push(o);
+    this.s.users.push({ id:uid(), org_id:o.id, role:'client_admin', full_name:p.contact_name||p.company, email:p.email, phone:p.phone, active:true, created_at:nowISO() });
+    this.save(); return o;
+  }
+  async updateOrg(id, patch){ const o=this.s.orgs.find(x=>x.id===id); Object.assign(o, patch); this.save(); return o; }
+
+  async listProfiles(orgId){ const m=this.me;
+    if (m.role==='super_admin') return this.s.users.filter(u => orgId ? u.org_id===orgId : true);
+    return this.s.users.filter(u => u.org_id===m.org_id); }
+  async createExecutive(p){
+    const org_id = this._orgScope(p.org_id); const o=this.s.orgs.find(x=>x.id===org_id);
+    if (!['super_admin','client_admin'].includes(this.me.role)) throw new Error('Not allowed');
+    if (!p.full_name || !p.email) throw new Error('Name and email are required');
+    if (!p.password || p.password.length<8) throw new Error('Password must be 8+ characters');
+    if (this.s.users.some(u=>u.email.toLowerCase()===p.email.toLowerCase())) throw new Error('A login with this email already exists');
+    const n = this.s.users.filter(u=>u.org_id===org_id && u.role==='executive').length;
+    if (n >= o.max_executives) throw new Error(`Executive limit reached (${o.max_executives}). Contact your CRM provider to upgrade.`);
+    const u = { id:uid(), org_id, role:'executive', full_name:p.full_name, email:p.email, phone:p.phone, active:true, created_at:nowISO() };
+    this.s.users.push(u); this.save(); return u;
+  }
+  async setActive(userId, active){ const u=this.s.users.find(x=>x.id===userId); u.active=active; this.save(); }
+  async resetPassword(userId, pwd){ if(!pwd || pwd.length<8) throw new Error('Password must be 8+ characters'); }
+
+  _visibleLeads(){ const m=this.me;
+    if (m.role==='super_admin') return this.s.leads;
+    if (m.role==='client_admin') return this.s.leads.filter(l=>l.org_id===m.org_id);
+    return this.s.leads.filter(l=>l.assigned_to===m.id); }
+  async listLeads(orgId){ let L=this._visibleLeads(); if (orgId) L=L.filter(l=>l.org_id===orgId); return L.map(l=>({...l})); }
+  _pickNext(orgId){
+    const o=this.s.orgs.find(x=>x.id===orgId); if(!o || !o.auto_assign || !o.active) return null;
+    const ex=this.s.users.filter(u=>u.org_id===orgId && u.role==='executive' && u.active).sort((a,b)=>a.created_at.localeCompare(b.created_at)||a.id.localeCompare(b.id));
+    if(!ex.length) return null; const e=ex[o.rr_cursor % ex.length]; o.rr_cursor++; return e.id; }
+  _act(lead, kind, body, userId){ this.s.acts.push({ id:this.s.seq++, lead_id:lead.id, org_id:lead.org_id, user_id: userId===undefined ? (this._me||null) : userId, kind, body, created_at:nowISO() }); }
+  _name(id){ return (this.s.users.find(u=>u.id===id)||{}).full_name || 'nobody'; }
+  async insertLeads(orgId, rows, mode='auto', asUser){
+    const m=this.me; const out=[];
+    for (const r of rows) {
+      const L = { id:uid(), org_id: m && m.role!=='super_admin' ? m.org_id : orgId, name:r.name||'', phone:r.phone||null, email:r.email||null, city:r.city||null, source:r.source||'Manual',
+        status:'new', assigned_to:null, assigned_at:null, next_followup:null, deal_value:null, notes:r.notes||'', extra:r.extra||{}, created_by: asUser===null?null:(this._me||null), created_at:nowISO(), updated_at:nowISO() };
+      if (m && m.role==='executive') L.assigned_to = m.id;
+      else if (mode && mode!=='auto' && mode!=='none') L.assigned_to = mode;
+      else if (mode==='auto') L.assigned_to = this._pickNext(L.org_id);
+      if (L.assigned_to) L.assigned_at = nowISO();
+      this.s.leads.push(L); out.push(L);
+      this._act(L,'created','Lead created from '+L.source, asUser===null?null:undefined);
+      if (L.assigned_to) this._act(L,'assign','Assigned to '+this._name(L.assigned_to), asUser===null?null:undefined);
+    }
+    this.save(); return out.map(l=>({...l}));
+  }
+  async updateLead(id, patch){
+    const L=this.s.leads.find(x=>x.id===id); const m=this.me;
+    if (m.role==='executive'){ delete patch.assigned_to; delete patch.org_id; }
+    if ('assigned_to' in patch && patch.assigned_to!==L.assigned_to){ L.assigned_at=nowISO(); this._act(L,'assign','Re-assigned to '+this._name(patch.assigned_to)); }
+    if ('status' in patch && patch.status!==L.status) this._act(L,'status',`Status: ${L.status} → ${patch.status}`);
+    if ('next_followup' in patch && patch.next_followup && patch.next_followup!==L.next_followup) this._act(L,'followup','Follow-up set for '+fmtDT(patch.next_followup));
+    Object.assign(L, patch, { updated_at:nowISO() }); this.save(); return {...L};
+  }
+  async deleteLeads(ids){ const set=new Set(ids); this.s.leads=this.s.leads.filter(l=>!set.has(l.id)); this.s.acts=this.s.acts.filter(a=>!set.has(a.lead_id)); this.save(); }
+  async listActivities(leadId){ return this.s.acts.filter(a=>a.lead_id===leadId).sort((a,b)=>b.created_at.localeCompare(a.created_at)).map(a=>({...a, user_name: a.user_id ? this._name(a.user_id) : 'System'})); }
+  async addActivity(leadId, kind, body){ const L=this.s.leads.find(x=>x.id===leadId); this._act(L,kind,body); L.updated_at=nowISO(); this.save(); }
+  async distributeUnassigned(orgId){ let n=0; for (const L of this.s.leads.filter(l=>l.org_id===orgId && !l.assigned_to)) { const e=this._pickNext(orgId); if(!e) break; L.assigned_to=e; L.assigned_at=nowISO(); this._act(L,'assign','Assigned to '+this._name(e)); n++; } this.save(); return n; }
+
+  async listSources(orgId){ return this.s.sources.filter(x=>x.org_id===this._orgScope(orgId)); }
+  async createSource(orgId, name, kind){ const x={ id:uid(), org_id:this._orgScope(orgId), name, kind, api_key:Array.from({length:36},()=>'0123456789abcdef'[Math.floor(Math.random()*16)]).join(''), active:true, created_at:nowISO() }; this.s.sources.push(x); this.save(); return x; }
+  async updateSource(id, patch){ Object.assign(this.s.sources.find(x=>x.id===id), patch); this.save(); }
+  async deleteSource(id){ this.s.sources=this.s.sources.filter(x=>x.id!==id); this.save(); }
+  async simulateWebhook(src, body){ return (await this.insertLeads(src.org_id, [{ ...body, source:src.name, extra:body }], 'auto', null))[0]; }
+
+  async listCampaigns(orgId){ return this.s.campaigns.filter(c=> orgId ? c.org_id===orgId : (this.me.role==='super_admin' || c.org_id===this.me.org_id)); }
+  async createCampaign(c){ const x={ id:uid(), sent:0, status:'draft', created_by:this._me, created_at:nowISO(), ...c, org_id:this._orgScope(c.org_id) }; this.s.campaigns.push(x); this.save(); return x; }
+  async updateCampaign(id, patch){ Object.assign(this.s.campaigns.find(x=>x.id===id), patch); this.save(); }
+  async deleteCampaign(id){ this.s.campaigns=this.s.campaigns.filter(x=>x.id!==id); this.save(); }
+}
+
+/* ------------------------------------------------------------ SUPABASE */
+class SupaAPI {
+  constructor(cfg){ this.mode='live'; this.cfg=cfg; this.sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY); this.profile=null; }
+  get me(){ return this.profile; }
+  async _loadProfile(){ const { data:{ user } } = await this.sb.auth.getUser(); if(!user){ this.profile=null; return null; }
+    const { data, error } = await this.sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+    if (error) throw error; if (!data || !data.active) { await this.sb.auth.signOut(); throw new Error('Your account is not active. Contact your administrator.'); }
+    this.profile=data; return data; }
+  async session(){ const { data } = await this.sb.auth.getSession(); if(!data.session) return null; try { return await this._loadProfile(); } catch(e){ return null; } }
+  async signIn(email, password){ const { error } = await this.sb.auth.signInWithPassword({ email, password }); if (error) throw new Error(error.message==='Invalid login credentials'?'Wrong email or password':error.message); return this._loadProfile(); }
+  async signOut(){ await this.sb.auth.signOut(); this.profile=null; }
+  async _fn(body){ const { data, error } = await this.sb.functions.invoke('admin-users', { body });
+    if (error) { let msg=error.message; try { const j = await error.context.json(); msg=j.error||msg; } catch(e){} throw new Error(msg); }
+    if (data && data.error) throw new Error(data.error); return data; }
+  _chk({ data, error }){ if (error) throw new Error(error.message); return data; }
+
+  async listOrgs(){ return this._chk(await this.sb.from('organizations').select('*').order('created_at')); }
+  async createClient(p){ return (await this._fn({ action:'create_client', ...p })).org; }
+  async updateOrg(id, patch){ return this._chk(await this.sb.from('organizations').update(patch).eq('id',id).select().single()); }
+  async listProfiles(orgId){ let q=this.sb.from('profiles').select('*').order('created_at'); if(orgId) q=q.eq('org_id',orgId); return this._chk(await q); }
+  async createExecutive(p){ return this._fn({ action:'create_executive', ...p }); }
+  async setActive(userId, active){ return this._fn({ action:'set_active', user_id:userId, active }); }
+  async resetPassword(userId, password){ return this._fn({ action:'reset_password', user_id:userId, password }); }
+
+  async listLeads(orgId){ const all=[]; const size=1000;
+    for (let from=0; from<50000; from+=size){ let q=this.sb.from('leads').select('*').order('created_at',{ascending:false}).range(from, from+size-1); if(orgId) q=q.eq('org_id',orgId);
+      const rows=this._chk(await q); all.push(...rows); if(rows.length<size) break; }
+    return all; }
+  async insertLeads(orgId, rows, mode='auto'){
+    const out=[]; const payload = rows.map(r => { const x = { org_id:orgId, name:r.name||'', phone:r.phone||null, email:r.email||null, city:r.city||null, source:r.source||'Manual', notes:r.notes||null, extra:{ ...(r.extra||{}) } };
+      if (mode==='none') x.extra._no_auto = true; else if (mode && mode!=='auto') x.assigned_to = mode; return x; });
+    for (let i=0;i<payload.length;i+=500){ out.push(...this._chk(await this.sb.from('leads').insert(payload.slice(i,i+500)).select())); }
+    return out; }
+  async updateLead(id, patch){ return this._chk(await this.sb.from('leads').update(patch).eq('id',id).select().single()); }
+  async deleteLeads(ids){ for (let i=0;i<ids.length;i+=200) this._chk(await this.sb.from('leads').delete().in('id', ids.slice(i,i+200))); }
+  async listActivities(leadId){ const rows=this._chk(await this.sb.from('lead_activities').select('*, profiles(full_name)').eq('lead_id',leadId).order('created_at',{ascending:false}));
+    return rows.map(a=>({ ...a, user_name: a.profiles ? a.profiles.full_name : 'System' })); }
+  async addActivity(leadId, kind, body){ const L=this._chk(await this.sb.from('leads').select('org_id').eq('id',leadId).single());
+    this._chk(await this.sb.from('lead_activities').insert({ lead_id:leadId, org_id:L.org_id, user_id:this.profile.id, kind, body })); }
+  async distributeUnassigned(orgId){ return this._chk(await this.sb.rpc('distribute_unassigned', { p_org: orgId })); }
+  async listSources(orgId){ let q=this.sb.from('lead_sources').select('*').order('created_at'); if(orgId) q=q.eq('org_id',orgId); return this._chk(await q); }
+  async createSource(orgId, name, kind){ return this._chk(await this.sb.from('lead_sources').insert({ org_id:orgId||this.profile.org_id, name, kind }).select().single()); }
+  async updateSource(id, patch){ this._chk(await this.sb.from('lead_sources').update(patch).eq('id',id)); }
+  async deleteSource(id){ this._chk(await this.sb.from('lead_sources').delete().eq('id',id)); }
+  async simulateWebhook(src, body){ const r = await fetch(`${this.cfg.SUPABASE_URL}/functions/v1/capture-lead?key=${src.api_key}`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+    const j = await r.json(); if (!r.ok) throw new Error(j.error||'Failed'); return j; }
+  async listCampaigns(orgId){ let q=this.sb.from('campaigns').select('*').order('created_at',{ascending:false}); if(orgId) q=q.eq('org_id',orgId); return this._chk(await q); }
+  async createCampaign(c){ return this._chk(await this.sb.from('campaigns').insert({ ...c, org_id:c.org_id||this.profile.org_id, created_by:this.profile.id }).select().single()); }
+  async updateCampaign(id, patch){ this._chk(await this.sb.from('campaigns').update(patch).eq('id',id)); }
+  async deleteCampaign(id){ this._chk(await this.sb.from('campaigns').delete().eq('id',id)); }
+}
+</script>
+<script>/* =====================================================================
+   Roshan CRM — application
+   ===================================================================== */
+const CFG = window.CRM_CONFIG || {};
+const api = (CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY && window.supabase) ? new SupaAPI(CFG) : new DemoAPI();
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const h = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initials = n => String(n||'?').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase() || '?';
+const pct = (a,b) => b ? Math.round(a*1000/b)/10 : 0;
+function fmtDate(d){ if(!d) return '—'; return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); }
+function fmtDT(d){ if(!d) return '—'; return new Date(d).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:true}); }
+function fmtTime(d){ return new Date(d).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true}); }
+function rel(d){ const s=(Date.now()-Date.parse(d))/1000; if(s<60) return 'just now'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; if(s<86400*7) return Math.floor(s/86400)+'d ago'; return fmtDate(d); }
+const sod = (d=new Date()) => { const x=new Date(d); x.setHours(0,0,0,0); return x; };
+const isToday = d => d && sod(d).getTime()===sod().getTime();
+const isOverdue = d => d && Date.parse(d) < Date.now() && !isToday(d);
+const inr = n => '₹' + Number(n||0).toLocaleString('en-IN');
+const waNum = p => { let d=String(p||'').replace(/\D/g,''); if(d.length===10) d='91'+d; return d; };
+const CLOSED = ['won','lost','not_interested'];
+
+function rangeOf(key){
+  const t=sod(), D=86400e3;
+  switch(key){
+    case 'today': return [t, null];
+    case 'yesterday': return [new Date(t-D), t];
+    case '7d': return [new Date(t-6*D), null];
+    case '30d': return [new Date(t-29*D), null];
+    case 'month': return [new Date(t.getFullYear(), t.getMonth(), 1), null];
+    case 'lastmonth': return [new Date(t.getFullYear(), t.getMonth()-1, 1), new Date(t.getFullYear(), t.getMonth(), 1)];
+    case '90d': return [new Date(t-89*D), null];
+    default: return [null,null];
+  }
+}
+const RANGES = [['all','All time'],['today','Today'],['yesterday','Yesterday'],['7d','Last 7 days'],['30d','Last 30 days'],['month','This month'],['lastmonth','Last month'],['90d','Last 90 days']];
+const inRange = (d, key) => { const [a,b]=rangeOf(key); const t=Date.parse(d); return (!a || t>=a.getTime()) && (!b || t<b.getTime()); };
+
+/* ------------------------------------------------------------- icons */
+const ICONS = {
+  home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  leads:'<path d="M4 6h16M4 12h16M4 18h10"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>',
+  team:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
+  plug:'<path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+  chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+  building:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/>',
+  logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  menu:'<path d="M3 6h18M3 12h18M3 18h18"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+  wa:'<path d="M3 21l1.7-5A9 9 0 1 1 8 19.4z"/><path d="M9 10c0 3 2 5 5 5l1-1.5-2-1-1 .8c-1-.4-1.9-1.3-2.3-2.3l.8-1-1-2z"/>',
+  mail:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
+  note:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/>',
+  flag:'<path d="M4 22V4M4 4h12l-2 4 2 4H4"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  dl:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
+  copy:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  shuffle:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
+  star:'<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>',
+  key:'<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/>',
+};
+const ic = (n, s='') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${s}>${ICONS[n]||''}</svg>`;
+const ACT_ICON = { created:'plus', assign:'shuffle', status:'flag', note:'note', call:'phone', whatsapp:'wa', email:'mail', followup:'clock' };
+
+/* ------------------------------------------------------------- state */
+const S = {
+  me:null, orgs:[], org:'', page:'dashboard', leads:[], profiles:[], sources:[], campaigns:[],
+  f:{ q:'', status:'', source:'', owner:'', range:'all', page:1, size:50 }, sel:new Set(),
+  fu:'overdue', rep:'30d', up:{ step:1 }, loading:false,
+};
+const isSuper = () => S.me?.role==='super_admin';
+const isAdmin = () => S.me?.role==='client_admin';
+const isExec  = () => S.me?.role==='executive';
+const canManage = () => isSuper() || isAdmin();
+const curOrgId = () => isSuper() ? S.org : S.me?.org_id;
+const curOrg = () => S.orgs.find(o => o.id===curOrgId());
+const orgName = id => (S.orgs.find(o=>o.id===id)||{}).name || '—';
+const person = id => S.profiles.find(p=>p.id===id);
+const pname = id => id ? (person(id)?.full_name || 'Unknown') : 'Unassigned';
+const execs = (orgId=curOrgId(), activeOnly=false) => S.profiles.filter(p=>p.role==='executive' && (!orgId || p.org_id===orgId) && (!activeOnly || p.active));
+const scopedLeads = () => { const o=curOrgId(); return o ? S.leads.filter(l=>l.org_id===o) : S.leads; };
+
+/* ----------------------------------------------------------- toasts etc */
+function toast(msg, err=false){ let w=$('.toast-wrap'); if(!w){ w=document.createElement('div'); w.className='toast-wrap'; document.body.appendChild(w); }
+  const t=document.createElement('div'); t.className='toast'+(err?' err':''); t.textContent=msg; w.appendChild(t); setTimeout(()=>t.remove(), 3200); }
+function closeLayer(){ const m=$('.modal'); if(m && m._res){ const r=m._res; m._res=null; r(false); } $$('.overlay,.drawer,.modal').forEach(e=>e.remove()); S.openLead=null; }
+function openModal(html, wide=false){ closeLayer(); document.body.insertAdjacentHTML('beforeend', `<div class="overlay" data-act="close"></div><div class="modal ${wide?'wide':''}" role="dialog">${html}</div>`); const f=$('.modal input,.modal select,.modal textarea'); if(f) f.focus(); }
+function ask({ title, body='', confirm='Confirm', danger=false, input=null }){ return new Promise(res => {
+  openModal(`<h3>${h(title)}</h3>${body?`<p class="muted">${body}</p>`:''}<form data-form="ask">${input!==null?`<div class="field" style="margin-top:12px"><input class="input" id="ask-in" value="${h(input)}"></div>`:''}<div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn ${danger?'btn-danger':'btn-primary'}" type="submit">${h(confirm)}</button></div></form>`);
+  const m=$('.modal'); m._res=res; if(input!==null) $('#ask-in').select(); }); }
+async function busy(btn, fn){ const t=btn?.innerHTML; if(btn){ btn.disabled=true; btn.innerHTML='Please wait…'; } try { return await fn(); } catch(e){ toast(e.message||String(e), true); } finally { if(btn && document.body.contains(btn)){ btn.disabled=false; btn.innerHTML=t; } } }
+function download(name, text, type='text/csv'){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['﻿'+text],{type})); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000); }
+const csvCell = v => { const s=String(v??''); return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; };
+const toCSV = rows => rows.map(r=>r.map(csvCell).join(',')).join('\n');
+const statusPill = s => `<span class="pill s-${h(s)}">${h(STATUS_LABEL[s]||s)}</span>`;
+function fuTag(l){ if(!l.next_followup || CLOSED.includes(l.status)) return '<span class="muted">—</span>';
+  if(isOverdue(l.next_followup)) return `<span class="tag overdue">Overdue · ${fmtDate(l.next_followup)}</span>`;
+  if(isToday(l.next_followup)) return `<span class="tag today">Today ${fmtTime(l.next_followup)}</span>`;
+  return `<span class="tag">${fmtDT(l.next_followup)}</span>`; }
+
+/* ----------------------------------------------------------- data load */
+async function loadAll(){
+  S.loading=true; render();
+  try {
+    S.orgs = await api.listOrgs();
+    if (isSuper() && S.org && !S.orgs.find(o=>o.id===S.org)) S.org='';
+    const o = curOrgId();
+    const [profiles, leads] = await Promise.all([api.listProfiles(isSuper()? '' : o), api.listLeads(isSuper()? (o||'') : '')]);
+    S.profiles=profiles; S.leads=leads;
+    if (canManage()) { [S.sources, S.campaigns] = await Promise.all([ o ? api.listSources(o) : Promise.resolve([]), api.listCampaigns(isSuper()? o : '') ]); }
+  } catch(e){ toast(e.message, true); }
+  S.loading=false; render();
+}
+async function refreshLeads(){ const o=curOrgId(); S.leads = await api.listLeads(isSuper()? (o||'') : ''); }
+
+/* ================================================================ LOGIN */
+function renderLogin(){
+  const demo = api.mode==='demo';
+  let roles='';
+  if (demo) { const u=api.demoUsers(); const sup=u.find(x=>x.role==='super_admin'); const adm=u.find(x=>x.role==='client_admin'); const ex=u.find(x=>x.role==='executive' && x.org_id===adm?.org_id);
+    const row=(x,label)=> x ? `<button class="demo-role" data-act="demo-login" data-id="${x.id}"><span class="avatar">${initials(x.full_name)}</span><span><b>${h(x.full_name)}</b><span class="small muted">${label}</span></span></button>`:'';
+    roles = `<div class="section-t" style="margin-top:22px">Or explore the demo as</div><div class="demo-roles">
+      ${row(sup,'Super Admin · controls every client')}${row(adm,'Client Admin · '+h((api.s.orgs.find(o=>o.id===adm?.org_id)||{}).name||''))}${row(ex,'Sales Executive · sees only own leads')}</div>
+      <p class="small muted" style="margin-top:14px">Demo mode stores sample data in this browser only. <a href="#" data-act="reset-demo">Reset demo data</a></p>`; }
+  return `<div class="login">
+    <div>
+      <span class="eyebrow">Roshan CRM</span>
+      <h1 style="margin-top:22px">Every lead to the right person, <span class="script">instantly</span>.</h1>
+      <p class="lead">Upload leads or capture them from your forms and ads. They're shared out to your sales team automatically, and every call, follow-up and sale is tracked in one place.</p>
+      <ul class="ticks">
+        <li><span class="tick">✓</span>Automatic round-robin lead distribution</li>
+        <li><span class="tick">✓</span>Follow-up reminders so no lead goes cold</li>
+        <li><span class="tick">✓</span>Live reports for every executive and source</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="logo">Roshan<span class="dot">.</span></div>
+      <div class="progress"><span style="width:55%"></span></div>
+      <h2 style="font-size:26px">Welcome back</h2>
+      <p class="muted" style="margin:6px 0 20px">Sign in to your CRM account.</p>
+      <form data-form="login">
+        <div class="field"><label>Email <span class="req">*</span></label><input class="input" name="email" type="email" required placeholder="you@company.com" autocomplete="username"></div>
+        <div class="field"><label>Password <span class="req">*</span></label><input class="input" name="password" type="password" ${demo?'':'required'} placeholder="${demo?'Any password works in demo':'••••••••'}" autocomplete="current-password"></div>
+        <button class="btn btn-primary" style="width:100%;padding:14px" type="submit">Sign in →</button>
+      </form>
+      ${roles}
+    </div>
+  </div>`;
+}
+
+/* ================================================================ SHELL */
+function navItems(){
+  if (isExec()) return [['dashboard','home','Dashboard'],['leads','leads','My Leads'],['followups','clock','Follow-ups']];
+  const items = [['dashboard','home','Dashboard'],['leads','leads','Leads'],['followups','clock','Follow-ups'],['upload','upload','Upload Leads'],['team','team','Team'],['sources','plug','Lead Sources'],['campaigns','send','Campaigns'],['reports','chart','Reports']];
+  return isSuper() ? [['clients','building','Clients'], ...items] : items;
+}
+const TITLES = { dashboard:['Your','dashboard'], leads:['All','leads'], followups:['Follow-','ups'], upload:['Upload','leads'], team:['Sales','team'], sources:['Lead','sources'], campaigns:['Campaigns',''], reports:['Reports',''], clients:['Your','clients'] };
+function renderShell(){
+  const due = (isExec()? S.leads : scopedLeads()).filter(l=>l.next_followup && !CLOSED.includes(l.status) && (isToday(l.next_followup)||isOverdue(l.next_followup))).length;
+  const nav = navItems().map(([k,i,l]) => `<a class="${S.page===k?'active':''}" data-act="nav" data-page="${k}">${ic(i)}<span>${l}</span>${k==='followups'&&due?`<span class="count">${due}</span>`:''}</a>`).join('');
+  const ws = isSuper()
+    ? `<div class="ws"><label>Workspace</label><select data-act="ws">${`<option value="">All clients</option>`+S.orgs.map(o=>`<option value="${o.id}" ${o.id===S.org?'selected':''}>${h(o.name)}</option>`).join('')}</select></div>`
+    : `<div class="ws"><label>Company</label><div class="ws-name">${h(curOrg()?.name||'')}</div></div>`;
+  const roleLabel = {super_admin:'Super Admin',client_admin:'Admin',executive:'Sales Executive'}[S.me.role];
+  const [t1,t2] = (isExec() && S.page==='leads') ? ['My','leads'] : (TITLES[S.page]||['','']);
+  return `<div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="logo"><span>Roshan<span class="dot">.</span></span><small>CRM</small></div>
+      ${ws}
+      <div class="nav-label">Menu</div>
+      <nav class="nav">${nav}</nav>
+      <div class="side-foot"><span class="avatar">${initials(S.me.full_name)}</span><div class="who"><b>${h(S.me.full_name)}</b><span>${roleLabel}</span></div><button class="icon-btn" title="Sign out" data-act="logout">${ic('logout','width="16"')}</button></div>
+    </aside>
+    <main class="main">
+      <div class="topbar">
+        <button class="icon-btn menu-btn" data-act="menu">${ic('menu','width="18"')}</button>
+        <h2>${h(t1)} ${t2?`<span class="script" style="text-decoration:none">${h(t2)}</span>`:''}</h2>
+        <span class="spacer"></span>
+        ${api.mode==='demo'?'<span class="demo-pill">Demo mode</span>':''}
+        ${S.page!=='leads' ? `<button class="btn btn-primary btn-sm" data-act="add-lead">${ic('plus','width="16"')} Add lead</button>`:''}
+      </div>
+      <div class="content">${S.loading ? '<div class="spinner"></div>' : (PAGES[S.page]||PAGES.dashboard)()}</div>
+    </main>
+  </div>`;
+}
+function render(){
+  const root=$('#app');
+  if (!S.me) { root.innerHTML = renderLogin(); return; }
+  if (!navItems().some(n=>n[0]===S.page)) S.page='dashboard';
+  root.innerHTML = renderShell();
+  if (S.openLead) {} // drawer handled separately
+}
+function go(page){ S.page=page; S.sel.clear(); location.hash='#'+page; render(); window.scrollTo(0,0); }
+function needOrg(what){ return `<div class="panel empty"><h4>Pick a client first</h4><p>Choose a client in the <b>Workspace</b> switcher on the left to ${what}.</p><div class="row" style="justify-content:center;margin-top:10px">${S.orgs.map(o=>`<button class="btn btn-ghost btn-sm" data-act="pick-org" data-id="${o.id}">${h(o.name)}</button>`).join('')}</div></div>`; }
+
+/* ============================================================= PAGES */
+const PAGES = {};
+
+/* ---------- Dashboard */
+PAGES.dashboard = () => {
+  const L = isExec() ? S.leads : scopedLeads();
+  const today = L.filter(l=>isToday(l.created_at)).length;
+  const open = L.filter(l=>!CLOSED.includes(l.status));
+  const dueToday = open.filter(l=>l.next_followup && isToday(l.next_followup));
+  const overdue = open.filter(l=>l.next_followup && isOverdue(l.next_followup));
+  const won = L.filter(l=>l.status==='won');
+  const wonMonth = won.filter(l=>inRange(l.updated_at,'month'));
+  const fresh = L.filter(l=>l.status==='new');
+  const kpis = `<div class="kpis">
+    <div class="kpi dark"><div class="k-label">${isExec()?'My leads':'Total leads'}</div><div class="k-val">${L.length}</div><div class="k-sub">${today} new today</div></div>
+    <div class="kpi"><div class="k-label">Untouched (Open)</div><div class="k-val">${fresh.length}</div><div class="k-sub">waiting for first call</div></div>
+    <div class="kpi"><div class="k-label">Follow-ups today</div><div class="k-val">${dueToday.length}</div><div class="k-sub">${overdue.length} overdue</div></div>
+    <div class="kpi"><div class="k-label">Won this month</div><div class="k-val">${wonMonth.length}</div><div class="k-sub">${inr(wonMonth.reduce((a,l)=>a+(+l.deal_value||0),0))} value</div></div>
+    <div class="kpi"><div class="k-label">Conversion</div><div class="k-val">${pct(won.length, L.length)}%</div><div class="k-sub">won ÷ all leads</div></div>
+  </div>`;
+  // last 14 days chart
+  const days=[...Array(14)].map((_,i)=>{ const d=sod(); d.setDate(d.getDate()-13+i); return d; });
+  const counts=days.map(d=>L.filter(l=>sod(l.created_at).getTime()===d.getTime()).length); const mx=Math.max(1,...counts);
+  const chart = `<div class="vchart">${days.map((d,i)=>`<div class="vb" title="${counts[i]} leads"><small>${counts[i]||''}</small><span style="height:${counts[i]/mx*100}%"></span><small>${d.getDate()}</small></div>`).join('')}</div>`;
+  const sb = STATUSES.map(([k,lbl])=>{ const n=L.filter(l=>l.status===k).length; return `<div class="bar-row"><span>${lbl}</span><div class="bar-track"><div class="bar-fill ${k==='won'?'g':''}" style="width:${pct(n,L.length)}%"></div></div><b class="small">${n}</b></div>`; }).join('');
+  const fuList = [...overdue, ...dueToday].slice(0,8).map(l=>`<div class="li" data-act="open-lead" data-id="${l.id}"><span class="avatar sm">${initials(l.name)}</span><div class="grow"><b>${h(l.name||l.phone)}</b><span class="small muted">${h(l.phone||'')} · ${h(pname(l.assigned_to))}</span></div>${fuTag(l)}</div>`).join('') || '<p class="muted small">Nothing due. Nice work.</p>';
+  if (isExec()) {
+    const newList = fresh.slice(0,8).map(l=>`<div class="li" data-act="open-lead" data-id="${l.id}"><span class="avatar sm">${initials(l.name)}</span><div class="grow"><b>${h(l.name||l.phone)}</b><span class="small muted">${h(l.source||'')} · ${rel(l.created_at)}</span></div><a class="btn btn-ghost btn-xs" href="tel:${h(l.phone)}" data-act="log-call" data-id="${l.id}">${ic('phone','width="13"')} Call</a></div>`).join('') || '<p class="muted small">No new leads right now.</p>';
+    return kpis + `<div class="cols-eq"><div class="panel"><div class="panel-h"><h3>Follow-ups due</h3><span class="spacer"></span><a class="small" data-act="nav" data-page="followups" href="#">View all →</a></div><div class="list">${fuList}</div></div>
+      <div class="panel"><div class="panel-h"><h3>New leads to call</h3></div><div class="list">${newList}</div></div></div>
+      <div class="panel" style="margin-top:18px"><div class="panel-h"><h3>My pipeline</h3></div><div class="bars">${sb}</div></div>`;
+  }
+  let clientsTbl='';
+  if (isSuper() && !S.org) {
+    clientsTbl = `<div class="panel" style="margin-bottom:18px"><div class="panel-h"><h3>Clients overview</h3><span class="spacer"></span><a class="small" href="#" data-act="nav" data-page="clients">Manage clients →</a></div>
+    <div class="table-wrap" style="box-shadow:none"><table class="t cards"><thead><tr><th>Client</th><th>Executives</th><th>Leads</th><th>New today</th><th>Won</th><th>Conversion</th><th></th></tr></thead><tbody>
+    ${S.orgs.map(o=>{ const ol=S.leads.filter(l=>l.org_id===o.id); const w=ol.filter(l=>l.status==='won').length; return `<tr><td class="name">${h(o.name)}</td><td data-l="Executives">${execs(o.id).length} / ${o.max_executives}</td><td data-l="Leads">${ol.length}</td><td data-l="Today">${ol.filter(l=>isToday(l.created_at)).length}</td><td data-l="Won">${w}</td><td data-l="Conv">${pct(w,ol.length)}%</td><td><button class="btn btn-ghost btn-xs" data-act="pick-org" data-id="${o.id}">Open</button></td></tr>`; }).join('')}
+    </tbody></table></div></div>`;
+  }
+  const board = execs().map(e=>{ const el=L.filter(l=>l.assigned_to===e.id); return { e, n:el.length, w:el.filter(l=>l.status==='won').length, t:el.filter(l=>l.status!=='new').length }; }).sort((a,b)=>b.w-a.w||b.t-a.t).slice(0,6)
+    .map((r,i)=>`<div class="li" style="cursor:default"><span class="avatar sm">${i===0&&r.w?ic('star','width="14"'):initials(r.e.full_name)}</span><div class="grow"><b>${h(r.e.full_name)}${isSuper()&&!S.org?` <span class="small muted">· ${h(orgName(r.e.org_id))}</span>`:''}</b><span class="small muted">${r.n} leads · ${r.t} worked</span></div><span class="pill s-won">${r.w} won</span></div>`).join('') || '<p class="muted small">No executives yet.</p>';
+  return kpis + clientsTbl + `<div class="cols"><div class="stack">
+      <div class="panel"><div class="panel-h"><h3>Leads — last 14 days</h3></div>${chart}</div>
+      <div class="panel"><div class="panel-h"><h3>Lead status</h3></div><div class="bars">${sb}</div></div></div>
+    <div class="stack"><div class="panel"><div class="panel-h"><h3>Team leaderboard</h3></div><div class="list">${board}</div></div>
+      <div class="panel"><div class="panel-h"><h3>Follow-ups due</h3><span class="spacer"></span><a class="small" data-act="nav" data-page="followups" href="#">View all →</a></div><div class="list">${fuList}</div></div></div></div>`;
+};
+
+/* ---------- Leads */
+function filteredLeads(){
+  const f=S.f; const q=f.q.trim().toLowerCase();
+  return (isExec()? S.leads : scopedLeads()).filter(l =>
+    (!f.status || l.status===f.status) && (!f.source || l.source===f.source) &&
+    (!f.owner || (f.owner==='__none' ? !l.assigned_to : l.assigned_to===f.owner)) &&
+    (f.range==='all' || inRange(l.created_at, f.range)) &&
+    (!q || [l.name,l.phone,l.email,l.city].some(v=>String(v||'').toLowerCase().includes(q))))
+    .sort((a,b)=>b.created_at.localeCompare(a.created_at));
+}
+PAGES.leads = () => {
+  const base = isExec()? S.leads : scopedLeads(); const f=S.f;
+  const all = filteredLeads(); const pages=Math.max(1,Math.ceil(all.length/f.size)); if(f.page>pages) f.page=pages;
+  const rows = all.slice((f.page-1)*f.size, f.page*f.size);
+  const sources=[...new Set(base.map(l=>l.source).filter(Boolean))].sort();
+  const cnt = k => base.filter(l=>l.status===k).length;
+  const chips = `<div class="chips"><button class="chip ${!f.status?'on':''}" data-act="fstatus" data-v="">All<b>${base.length}</b></button>${STATUSES.map(([k,l])=>`<button class="chip ${f.status===k?'on':''}" data-act="fstatus" data-v="${k}">${l}<b>${cnt(k)}</b></button>`).join('')}</div>`;
+  const ownerSel = canManage() ? `<select class="input" data-f="owner"><option value="">All owners</option><option value="__none" ${f.owner==='__none'?'selected':''}>Unassigned</option>${execs().map(e=>`<option value="${e.id}" ${f.owner===e.id?'selected':''}>${h(e.full_name)}</option>`).join('')}</select>` : '';
+  const toolbar = `<div class="toolbar">
+    <input class="input search" placeholder="Search name, mobile, email, city…" data-f="q" value="${h(f.q)}">
+    <select class="input" data-f="range">${RANGES.map(([k,l])=>`<option value="${k}" ${f.range===k?'selected':''}>${l}</option>`).join('')}</select>
+    <select class="input" data-f="source"><option value="">All sources</option>${sources.map(s=>`<option ${f.source===s?'selected':''}>${h(s)}</option>`).join('')}</select>
+    ${ownerSel}<span class="spacer"></span>
+    <button class="btn btn-ghost btn-sm" data-act="export-leads">${ic('dl','width="15"')} Export</button>
+    <button class="btn btn-primary btn-sm" data-act="add-lead">${ic('plus','width="15"')} Add lead</button></div>`;
+  const bulk = canManage() && S.sel.size ? `<div class="bulkbar"><b>${S.sel.size} selected</b><span class="spacer"></span>
+    <select data-act="bulk-assign"><option value="">Assign to…</option>${execs(curOrgId()||undefined).filter(e=>e.active).map(e=>`<option value="${e.id}">${h(e.full_name)}</option>`).join('')}</select>
+    <select data-act="bulk-status"><option value="">Change status…</option>${STATUSES.map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select>
+    <button class="btn btn-danger btn-xs" data-act="bulk-delete">Delete</button><button class="btn btn-xs" style="color:#fff" data-act="bulk-clear">Clear</button></div>` : '';
+  const showOrg = isSuper() && !S.org;
+  const table = rows.length ? `<div class="table-wrap"><table class="t cards"><thead><tr>
+      ${canManage()?`<th style="width:34px"><input type="checkbox" data-act="sel-all" ${rows.every(r=>S.sel.has(r.id))?'checked':''}></th>`:''}
+      <th>#</th><th>Name</th><th>Lead status</th><th>Mobile</th><th>Lead owner</th>${showOrg?'<th>Client</th>':''}<th>Entry date</th><th>Source</th><th>Follow-up</th><th>Updated</th></tr></thead><tbody>
+      ${rows.map((l,i)=>`<tr class="click" data-act="open-lead" data-id="${l.id}">
+        ${canManage()?`<td class="cb" data-stop><input type="checkbox" data-act="sel" data-id="${l.id}" ${S.sel.has(l.id)?'checked':''}></td>`:''}
+        <td class="muted small sno">${(f.page-1)*f.size+i+1}</td>
+        <td><div class="name">${h(l.name||'(no name)')}</div><div class="sub">${h(l.email||l.city||'')}</div></td>
+        <td data-l="Status">${statusPill(l.status)}</td>
+        <td data-l="Mobile" class="nowrap">${h(l.phone||'—')}</td>
+        <td data-l="Owner">${l.assigned_to?h(pname(l.assigned_to)):'<span class="tag overdue">Unassigned</span>'}</td>
+        ${showOrg?`<td data-l="Client">${h(orgName(l.org_id))}</td>`:''}
+        <td data-l="Entry" class="nowrap small">${fmtDT(l.created_at)}</td>
+        <td data-l="Source"><span class="tag">${h(l.source||'—')}</span></td>
+        <td data-l="Follow-up">${fuTag(l)}</td>
+        <td data-l="Updated" class="small muted nowrap">${rel(l.updated_at)}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="pager"><span>Total count: <b>${all.length}</b></span><span class="spacer"></span>Show <select class="input" style="width:auto;padding:5px 8px" data-f="size">${[20,50,100,500].map(n=>`<option ${f.size==n?'selected':''}>${n}</option>`).join('')}</select>
+      <button class="btn btn-ghost btn-xs" data-act="pg" data-d="-1" ${f.page<=1?'disabled':''}>← Prev</button><span>${f.page} / ${pages}</span><button class="btn btn-ghost btn-xs" data-act="pg" data-d="1" ${f.page>=pages?'disabled':''}>Next →</button></div></div>`
+    : `<div class="panel empty"><h4>No leads found</h4><p>${base.length?'Try clearing the filters.':'Upload a file or add your first lead to get started.'}</p>${canManage()&&!base.length?'<button class="btn btn-primary" data-act="nav" data-page="upload">Upload leads</button>':''}</div>`;
+  return chips + toolbar + bulk + table;
+};
+
+/* ---------- Follow-ups */
+PAGES.followups = () => {
+  const L=(isExec()? S.leads : scopedLeads()).filter(l=>l.next_followup && !CLOSED.includes(l.status));
+  const groups = { overdue:L.filter(l=>isOverdue(l.next_followup)), today:L.filter(l=>isToday(l.next_followup)), upcoming:L.filter(l=>Date.parse(l.next_followup)>=sod().getTime()+86400e3) };
+  const list = groups[S.fu].sort((a,b)=>a.next_followup.localeCompare(b.next_followup));
+  const tabs = [['overdue','Overdue'],['today','Today'],['upcoming','Upcoming']].map(([k,l])=>`<button class="chip ${S.fu===k?'on':''}" data-act="fu-tab" data-v="${k}">${l}<b>${groups[k].length}</b></button>`).join('');
+  return `<div class="chips">${tabs}</div>` + (list.length ? `<div class="table-wrap"><table class="t cards"><thead><tr><th>Lead</th><th>Mobile</th><th>Status</th><th>Due</th>${canManage()?'<th>Owner</th>':''}<th style="text-align:right">Quick action</th></tr></thead><tbody>
+    ${list.map(l=>`<tr class="click" data-act="open-lead" data-id="${l.id}"><td><div class="name">${h(l.name||'(no name)')}</div><div class="sub">${h(l.source||'')}</div></td><td data-l="Mobile">${h(l.phone||'—')}</td><td data-l="Status">${statusPill(l.status)}</td><td data-l="Due">${fuTag(l)}</td>${canManage()?`<td data-l="Owner">${h(pname(l.assigned_to))}</td>`:''}
+    <td style="text-align:right" data-stop class="nowrap"><a class="btn btn-ghost btn-xs" href="tel:${h(l.phone)}" data-act="log-call" data-id="${l.id}">${ic('phone','width="13"')} Call</a> <a class="btn btn-ghost btn-xs" target="_blank" rel="noopener" href="https://wa.me/${waNum(l.phone)}" data-act="log-wa" data-id="${l.id}">${ic('wa','width="13"')} WhatsApp</a></td></tr>`).join('')}
+    </tbody></table></div>` : `<div class="panel empty"><h4>${S.fu==='overdue'?'No overdue follow-ups':'Nothing scheduled'}</h4><p>Set a follow-up from any lead and it shows up here.</p></div>`);
+};
+
+/* ---------- Upload */
+const FIELD_GUESS = { name:['name','fullname','customername','leadname','firstname','contactname'], phone:['phone','mobile','mobileno','phonenumber','contact','contactno','whatsapp','number','mobilenumber'], email:['email','emailid','emailaddress','mail'], city:['city','location','town','district','state'], source:['source','leadsource','campaign'] };
+function guessMap(headers){ const m={}; for (const [f,keys] of Object.entries(FIELD_GUESS)) { const i=headers.findIndex(x=>keys.includes(String(x).toLowerCase().replace(/[^a-z]/g,''))); m[f]= i>=0 ? i : ''; } return m; }
+function parseCSV(text){
+  const delim = (text.split('\n')[0].match(/\t/g)||[]).length > (text.split('\n')[0].match(/,/g)||[]).length ? '\t' : ',';
+  const rows=[]; let row=[], cur='', q=false;
+  for (let i=0;i<text.length;i++){ const c=text[i];
+    if (q){ if(c==='"'){ if(text[i+1]==='"'){ cur+='"'; i++; } else q=false; } else cur+=c; }
+    else if (c==='"') q=true; else if (c===delim){ row.push(cur); cur=''; }
+    else if (c==='\n' || c==='\r'){ if(c==='\r' && text[i+1]==='\n') i++; row.push(cur); rows.push(row); row=[]; cur=''; }
+    else cur+=c; }
+  if (cur!=='' || row.length){ row.push(cur); rows.push(row); }
+  return rows.filter(r=>r.some(c=>String(c).trim()!==''));
+}
+function previewDistribution(n){
+  const o=curOrg(); const ex=execs(o?.id,true).sort((a,b)=>a.created_at.localeCompare(b.created_at)||a.id.localeCompare(b.id));
+  const res=Object.fromEntries(ex.map(e=>[e.id,0])); if(!ex.length) return res; let c=o.rr_cursor||0;
+  for(let i=0;i<n;i++){ res[ex[c%ex.length].id]++; c++; } return res;
+}
+PAGES.upload = () => {
+  if (isSuper() && !S.org) return needOrg('upload leads for them');
+  const u=S.up; const steps=['Choose file','Map & distribute','Done'];
+  const stepper = `<div class="steps">${steps.map((s,i)=>`<span class="step ${u.step===i+1?'on':''} ${u.step>i+1?'done':''}"><span class="n">${u.step>i+1?'✓':i+1}</span>${s}</span>${i<2?'<span class="muted">—</span>':''}`).join('')}</div>`;
+  if (u.step===1) return stepper + `<div class="cols"><div class="stack">
+      <label class="drop" id="drop"><input type="file" accept=".csv,.txt,.xlsx,.xls" hidden data-act="file">
+        <div style="width:54px;height:54px;border-radius:16px;background:var(--accent-soft);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px">${ic('upload','width="26"')}</div>
+        <h3>Drop your Excel or CSV file here</h3><p class="muted">or click to browse · .xlsx, .xls, .csv</p></label>
+      <div class="panel"><div class="panel-h"><h3>…or paste rows</h3><span class="spacer"></span><span class="small muted">Copy straight from Excel / Google Sheets, header row first</span></div>
+        <textarea class="input" id="paste" rows="6" placeholder="Name, Mobile, Email, City&#10;Rahul Sharma, 9876543210, rahul@gmail.com, Delhi"></textarea>
+        <div class="row" style="margin-top:12px"><button class="btn btn-primary btn-sm" data-act="use-paste">Continue →</button></div></div></div>
+      <div class="panel"><h3 style="margin-bottom:8px">How it works</h3><ul class="ticks" style="gap:14px">
+        <li><span class="tick">1</span>Upload a file with name and mobile columns</li><li><span class="tick">2</span>Match the columns. Duplicates are skipped automatically</li>
+        <li><span class="tick">3</span>Leads are shared out round-robin to every active executive</li></ul>
+        <p class="muted small" style="margin-top:16px">Active executives in <b>${h(curOrg()?.name)}</b>: <b>${execs(curOrgId(),true).length}</b></p>
+        <button class="btn btn-ghost btn-sm" data-act="sample-csv">${ic('dl','width="15"')} Download sample file</button></div></div>`;
+  if (u.step===2) {
+    const opts = i => `<option value="">— don't import —</option>`+u.headers.map((x,j)=>`<option value="${j}" ${String(i)===String(j)?'selected':''}>${h(x||'Column '+(j+1))}</option>`).join('');
+    const ex = execs(curOrgId(),true); const n=u.rows.length;
+    const dist = previewDistribution(n);
+    const distHtml = u.mode==='auto' ? (ex.length ? `<div class="dist-grid" style="margin-top:12px">${ex.map(e=>`<div class="dist"><span class="avatar sm">${initials(e.full_name)}</span><div><b>${dist[e.id]||0}</b><span class="small muted">${h(e.full_name)}</span></div></div>`).join('')}</div>` : `<div class="note warn" style="margin-top:12px">No active executives yet, so leads will stay unassigned. Add executives in Team.</div>`) : '';
+    return stepper + `<div class="cols"><div class="stack"><div class="panel"><div class="panel-h"><h3>Match your columns</h3><span class="spacer"></span><span class="tag">${n} rows found</span></div>
+      <div class="grid2">${['name','phone','email','city','source'].map(f=>`<div class="field"><label>${{name:'Name',phone:'Mobile',email:'Email',city:'City',source:'Source column'}[f]} ${f==='phone'?'<span class="req">*</span>':''}</label><select class="input" data-up-map="${f}">${opts(u.map[f])}</select></div>`).join('')}
+      <div class="field"><label>Source name (if no column)</label><input class="input" data-up="sourceName" value="${h(u.sourceName)}"></div></div>
+      <label class="row small" style="gap:8px"><input type="checkbox" data-up="dedupe" ${u.dedupe?'checked':''}> Skip leads whose mobile already exists</label>
+      <div class="section-t">Preview</div><div class="table-wrap" style="box-shadow:none;overflow-x:auto"><table class="t"><thead><tr>${['Name','Mobile','Email','City','Source'].map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>
+      ${u.rows.slice(0,5).map(r=>{ const m=mapRow(r); return `<tr><td>${h(m.name)}</td><td>${h(m.phone)}</td><td>${h(m.email)}</td><td>${h(m.city)}</td><td>${h(m.source)}</td></tr>`; }).join('')}</tbody></table></div></div></div>
+      <div class="panel"><h3 style="margin-bottom:12px">How should leads be shared?</h3><div class="stack" style="gap:10px">
+        <label class="mode ${u.mode==='auto'?'on':''}"><input type="radio" name="mode" value="auto" data-up="mode" ${u.mode==='auto'?'checked':''}><span><b>Auto-distribute (round-robin)</b><br><span class="small muted">Shared equally across ${ex.length} active executive${ex.length===1?'':'s'}</span></span></label>
+        <label class="mode ${u.mode==='one'?'on':''}"><input type="radio" name="mode" value="one" data-up="mode" ${u.mode==='one'?'checked':''}><span><b>Give all to one executive</b><br>${u.mode==='one'?`<select class="input" style="margin-top:8px" data-up="target">${ex.map(e=>`<option value="${e.id}" ${u.target===e.id?'selected':''}>${h(e.full_name)}</option>`).join('')}</select>`:'<span class="small muted">Pick one person</span>'}</span></label>
+        <label class="mode ${u.mode==='none'?'on':''}"><input type="radio" name="mode" value="none" data-up="mode" ${u.mode==='none'?'checked':''}><span><b>Keep unassigned</b><br><span class="small muted">Assign them yourself later</span></span></label></div>
+        ${distHtml}
+        <div class="row" style="margin-top:18px"><button class="btn btn-ghost" data-act="up-back">← Back</button><span class="spacer"></span><button class="btn btn-primary" data-act="up-import">Import ${n} leads →</button></div></div></div>`;
+  }
+  const r=u.result; const counts={}; r.leads.forEach(l=>{ const k=l.assigned_to||'__none'; counts[k]=(counts[k]||0)+1; });
+  return stepper + `<div class="panel" style="text-align:center;padding:36px"><span class="tick" style="width:56px;height:56px;font-size:26px">✓</span>
+    <h2 style="margin:14px 0 6px">${r.leads.length} leads <span class="script">imported</span>.</h2><p class="muted">${r.skipped?`${r.skipped} duplicates/invalid rows skipped. `:''}Here's who received them:</p>
+    <div class="dist-grid" style="max-width:860px;margin:18px auto;text-align:left">${Object.entries(counts).map(([k,n])=>`<div class="dist"><span class="avatar sm">${k==='__none'?'—':initials(pname(k))}</span><div><b>${n}</b><span class="small muted">${k==='__none'?'Unassigned':h(pname(k))}</span></div></div>`).join('')}</div>
+    <div class="row" style="justify-content:center"><button class="btn btn-ghost" data-act="up-reset">Upload more</button><button class="btn btn-primary" data-act="nav" data-page="leads">View leads →</button></div></div>`;
+};
+function mapRow(r){ const u=S.up, g=f => u.map[f]==='' || u.map[f]==null ? '' : String(r[u.map[f]]??'').trim();
+  return { name:g('name'), phone:g('phone').replace(/[^\d+]/g,''), email:g('email'), city:g('city'), source:g('source')||u.sourceName||'Bulk upload' }; }
+async function startMapping(rows, fname){
+  if (rows.length<2) return toast('Need a header row and at least one lead', true);
+  S.up = { step:2, headers:rows[0].map(String), rows:rows.slice(1), map:guessMap(rows[0].map(String)), sourceName: fname ? fname.replace(/\.[^.]+$/,'') : 'Bulk upload', dedupe:true, mode:'auto', target:execs(curOrgId(),true)[0]?.id||'' };
+  render();
+}
+let XLSXP=null;
+function loadXLSX(){ if (window.XLSX) return Promise.resolve(); if (XLSXP) return XLSXP;
+  XLSXP = new Promise((res,rej)=>{ const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload=res; s.onerror=()=>rej(new Error('Could not load Excel reader. Save the file as CSV and try again.')); document.head.appendChild(s); }); return XLSXP; }
+async function readFile(file){
+  try {
+    if (/\.xlsx?$/i.test(file.name)) { await loadXLSX(); const wb=XLSX.read(await file.arrayBuffer(), {type:'array'}); const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, raw:false, defval:''}); startMapping(rows.filter(r=>r.some(c=>String(c).trim())), file.name); }
+    else startMapping(parseCSV(await file.text()), file.name);
+  } catch(e){ toast(e.message, true); }
+}
+
+/* ---------- Team */
+PAGES.team = () => {
+  if (isSuper() && !S.org) return needOrg('manage their sales team');
+  const o=curOrg(); const ex=execs(); const L=scopedLeads(); const un=L.filter(l=>!l.assigned_to).length;
+  const admins=S.profiles.filter(p=>p.org_id===o.id && p.role==='client_admin');
+  return `<div class="kpis">
+    <div class="kpi dark"><div class="k-label">Executives</div><div class="k-val">${ex.length} <span style="font-size:15px;color:#9DBDBA">/ ${o.max_executives}</span></div><div class="k-sub">${ex.filter(e=>e.active).length} active · plan limit ${o.max_executives}</div></div>
+    <div class="kpi"><div class="k-label">Auto-distribution</div><div class="row" style="margin-top:8px"><label class="switch"><input type="checkbox" data-act="toggle-auto" ${o.auto_assign?'checked':''}><span></span></label><b style="color:var(--ink)">${o.auto_assign?'On · round-robin':'Off'}</b></div><div class="k-sub" style="margin-top:6px">New leads go to the next active executive</div></div>
+    <div class="kpi"><div class="k-label">Unassigned leads</div><div class="k-val">${un}</div>${un?`<button class="btn btn-green btn-xs" data-act="distribute">${ic('shuffle','width="13"')} Distribute now</button>`:'<div class="k-sub">All leads have an owner</div>'}</div></div>
+    <div class="panel-h"><h3>Sales executives</h3><span class="spacer"></span><button class="btn btn-primary btn-sm" data-act="add-exec" ${ex.length>=o.max_executives?'disabled title="Plan limit reached"':''}>${ic('plus','width="15"')} Add executive</button></div>
+    ${ex.length ? `<div class="table-wrap"><table class="t cards"><thead><tr><th>Executive</th><th>Mobile</th><th>Leads</th><th>Open</th><th>Follow-up</th><th>Won</th><th>Active</th><th></th></tr></thead><tbody>
+    ${ex.map(e=>{ const el=L.filter(l=>l.assigned_to===e.id); return `<tr><td><div class="row" style="gap:10px;flex-wrap:nowrap"><span class="avatar sm">${initials(e.full_name)}</span><div><div class="name">${h(e.full_name)}</div><div class="sub">${h(e.email)}</div></div></div></td>
+      <td data-l="Mobile">${h(e.phone||'—')}</td><td data-l="Leads"><b>${el.length}</b></td><td data-l="Open">${el.filter(l=>l.status==='new').length}</td><td data-l="Follow-up">${el.filter(l=>l.status==='follow_up').length}</td><td data-l="Won">${el.filter(l=>l.status==='won').length}</td>
+      <td data-l="Active"><label class="switch"><input type="checkbox" data-act="toggle-user" data-id="${e.id}" ${e.active?'checked':''}><span></span></label></td>
+      <td class="nowrap"><button class="btn btn-ghost btn-xs" data-act="view-exec-leads" data-id="${e.id}">Leads</button> <button class="btn btn-ghost btn-xs" data-act="reset-pw" data-id="${e.id}">${ic('key','width="13"')} Password</button></td></tr>`; }).join('')}
+    </tbody></table></div>` : `<div class="panel empty"><h4>No executives yet</h4><p>Create a login for each salesperson. Leads start flowing to them automatically.</p><button class="btn btn-primary" data-act="add-exec">Add your first executive</button></div>`}
+    ${admins.length?`<p class="small muted" style="margin-top:14px">Admin login${admins.length>1?'s':''}: ${admins.map(a=>h(a.full_name)+' ('+h(a.email)+')').join(', ')}</p>`:''}
+    <div class="note" style="margin-top:14px">Turning an executive <b>off</b> blocks their login and stops new leads going to them. Their existing leads stay with them until you reassign them from Leads.</div>`;
+};
+
+/* ---------- Sources */
+const hookURL = k => api.mode==='live' ? `${CFG.SUPABASE_URL}/functions/v1/capture-lead?key=${k}` : `https://YOUR-PROJECT.supabase.co/functions/v1/capture-lead?key=${k}`;
+PAGES.sources = () => {
+  if (isSuper() && !S.org) return needOrg('connect lead sources');
+  const kindL = Object.fromEntries(SOURCE_KINDS);
+  const list = S.sources.map(s=>{ const n=scopedLeads().filter(l=>l.source===s.name).length; return `<div class="panel">
+    <div class="panel-h"><span class="avatar">${ic('plug','width="16"')}</span><div><h3>${h(s.name)}</h3><span class="small muted">${h(kindL[s.kind]||s.kind)} · ${n} leads</span></div><span class="spacer"></span>
+      <label class="switch" title="Active"><input type="checkbox" data-act="toggle-src" data-id="${s.id}" ${s.active?'checked':''}><span></span></label></div>
+    <div class="field" style="margin-bottom:10px"><label class="small">Webhook URL</label><div class="copy-row"><input class="input" readonly value="${h(hookURL(s.api_key))}"><button class="icon-btn" data-act="copy" data-v="${h(hookURL(s.api_key))}" title="Copy">${ic('copy','width="15"')}</button></div></div>
+    <div class="row"><button class="btn btn-ghost btn-sm" data-act="test-src" data-id="${s.id}">Send a test lead</button><button class="btn btn-ghost btn-sm" data-act="src-help" data-id="${s.id}">Setup guide</button><span class="spacer"></span><button class="btn btn-danger btn-xs" data-act="del-src" data-id="${s.id}">Remove</button></div></div>`; }).join('');
+  return `<div class="panel-h"><p class="muted" style="margin:0;max-width:640px">Connect website forms, Facebook / Google lead ads, IndiaMART or any tool that can send a webhook. Every lead lands here and is auto-assigned to the next executive within seconds.</p><span class="spacer"></span><button class="btn btn-primary btn-sm" data-act="add-src">${ic('plus','width="15"')} New source</button></div>
+    ${S.sources.length ? `<div class="cols-eq">${list}</div>` : `<div class="panel empty"><h4>No sources yet</h4><p>Create one for each form or ad campaign so you can see which brings the best leads.</p><button class="btn btn-primary" data-act="add-src">Create a source</button></div>`}`;
+};
+
+/* ---------- Campaigns */
+function audienceOf(a){ return scopedLeads().filter(l=>(!a.status || l.status===a.status) && (!a.source || l.source===a.source) && (!a.owner || l.assigned_to===a.owner) && (a.channel==='email' ? l.email : l.phone)); }
+const fillMsg = (t,l) => String(t||'').replace(/\{name\}/gi, (l.name||'').split(' ')[0]||'there').replace(/\{fullname\}/gi, l.name||'').replace(/\{city\}/gi, l.city||'').replace(/\{owner\}/gi, pname(l.assigned_to));
+PAGES.campaigns = () => {
+  const CH = {whatsapp:['WhatsApp','wa'], sms:['SMS','phone'], email:['Email','mail']};
+  const showOrg = isSuper() && !S.org;
+  return `<div class="panel-h"><p class="muted" style="margin:0;max-width:660px">Send a personalised message to a filtered group of leads (for example everyone who is <i>Interested</i> from Facebook). Recipients are logged on each lead's timeline.</p><span class="spacer"></span>${(!isSuper()||S.org)?`<button class="btn btn-primary btn-sm" data-act="new-camp">${ic('plus','width="15"')} New campaign</button>`:''}</div>
+  ${S.campaigns.length ? `<div class="table-wrap"><table class="t cards"><thead><tr><th>Campaign</th>${showOrg?'<th>Client</th>':''}<th>Channel</th><th>Progress</th><th>Created</th><th></th></tr></thead><tbody>
+  ${S.campaigns.map(c=>{ const sent=(c.audience.sent_ids||[]).length; return `<tr class="click" data-act="open-camp" data-id="${c.id}"><td><div class="name">${h(c.name)}</div><div class="sub">${h(c.message).slice(0,70)}…</div></td>${showOrg?`<td data-l="Client">${h(orgName(c.org_id))}</td>`:''}
+  <td data-l="Channel"><span class="tag">${CH[c.channel][0]}</span></td><td data-l="Progress" style="min-width:160px"><div class="bar-track"><div class="bar-fill g" style="width:${pct(sent,c.total)}%"></div></div><span class="small muted">${sent} / ${c.total} sent</span></td><td data-l="Created" class="small">${fmtDate(c.created_at)}</td><td><button class="btn btn-ghost btn-xs">Open</button></td></tr>`; }).join('')}
+  </tbody></table></div>` : `<div class="panel empty"><h4>No campaigns yet</h4><p>${isSuper()&&!S.org?'Pick a client in the Workspace switcher to create one.':'Re-engage cold leads or announce an offer to everyone in one go.'}</p></div>`}
+  <div class="note warn" style="margin-top:14px"><b>Sending:</b> each message opens ready-written in WhatsApp, SMS or email with one click. Fully automatic bulk sending through the WhatsApp Business API or an SMS gateway can be added once you choose a provider (e.g. Interakt, AiSensy, MSG91).</div>`;
+};
+
+/* ---------- Reports */
+PAGES.reports = () => {
+  const L = scopedLeads().filter(l=>S.rep==='all'||inRange(l.created_at,S.rep));
+  const ex = execs(); const showOrg = isSuper() && !S.org;
+  const rows = ex.map(e=>{ const el=L.filter(l=>l.assigned_to===e.id); const c=k=>el.filter(l=>l.status===k).length;
+    return { e, n:el.length, open:c('new'), worked:el.filter(l=>l.status!=='new').length, int:c('interested'), fu:c('follow_up'), won:c('won'), lost:c('lost')+c('not_interested'), od:el.filter(l=>l.next_followup&&!CLOSED.includes(l.status)&&isOverdue(l.next_followup)).length, val:el.filter(l=>l.status==='won').reduce((a,l)=>a+(+l.deal_value||0),0) }; })
+    .sort((a,b)=>b.won-a.won||b.n-a.n);
+  S._repRows = rows;
+  const srcs=[...new Set(L.map(l=>l.source||'—'))].map(s=>{ const sl=L.filter(l=>(l.source||'—')===s); const w=sl.filter(l=>l.status==='won').length; return {s,n:sl.length,w}; }).sort((a,b)=>b.n-a.n);
+  const mx=Math.max(1,...srcs.map(x=>x.n)); const won=L.filter(l=>l.status==='won');
+  return `<div class="toolbar"><select class="input" data-act="rep-range">${RANGES.map(([k,l])=>`<option value="${k}" ${S.rep===k?'selected':''}>${l}</option>`).join('')}</select><span class="spacer"></span><button class="btn btn-ghost btn-sm" data-act="export-rep">${ic('dl','width="15"')} Export CSV</button></div>
+  <div class="kpis"><div class="kpi dark"><div class="k-label">Leads</div><div class="k-val">${L.length}</div></div><div class="kpi"><div class="k-label">Worked</div><div class="k-val">${pct(L.filter(l=>l.status!=='new').length,L.length)}%</div><div class="k-sub">contacted at least once</div></div>
+  <div class="kpi"><div class="k-label">Won</div><div class="k-val">${won.length}</div><div class="k-sub">${inr(won.reduce((a,l)=>a+(+l.deal_value||0),0))}</div></div><div class="kpi"><div class="k-label">Conversion</div><div class="k-val">${pct(won.length,L.length)}%</div></div></div>
+  <div class="panel" style="margin-bottom:18px"><div class="panel-h"><h3>Executive performance</h3></div><div class="table-wrap" style="box-shadow:none"><table class="t cards"><thead><tr><th>Executive</th>${showOrg?'<th>Client</th>':''}<th>Leads</th><th>Open</th><th>Worked</th><th>Interested</th><th>Follow-up</th><th>Won</th><th>Lost</th><th>Conv.</th><th>Overdue</th><th>Value</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr><td class="name">${h(r.e.full_name)}${r.e.active?'':' <span class="tag">off</span>'}</td>${showOrg?`<td data-l="Client">${h(orgName(r.e.org_id))}</td>`:''}<td data-l="Leads"><b>${r.n}</b></td><td data-l="Open">${r.open}</td><td data-l="Worked">${r.worked}</td><td data-l="Interested">${r.int}</td><td data-l="Follow-up">${r.fu}</td><td data-l="Won"><span class="pill s-won">${r.won}</span></td><td data-l="Lost">${r.lost}</td><td data-l="Conv"><b>${pct(r.won,r.n)}%</b></td><td data-l="Overdue">${r.od?`<span class="tag overdue">${r.od}</span>`:'0'}</td><td data-l="Value">${inr(r.val)}</td></tr>`).join('') || '<tr><td colspan="12" class="muted">No executives</td></tr>'}
+  </tbody></table></div></div>
+  <div class="cols-eq"><div class="panel"><div class="panel-h"><h3>Leads by source</h3></div><div class="bars">${srcs.map(x=>`<div class="bar-row" style="grid-template-columns:150px 1fr 90px"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h(x.s)}</span><div class="bar-track"><div class="bar-fill" style="width:${x.n/mx*100}%"></div></div><span class="small"><b>${x.n}</b> · ${pct(x.w,x.n)}% won</span></div>`).join('')||'<p class="muted">No data</p>'}</div></div>
+  <div class="panel"><div class="panel-h"><h3>Status funnel</h3></div><div class="bars">${STATUSES.map(([k,lbl])=>{ const n=L.filter(l=>l.status===k).length; return `<div class="bar-row"><span>${lbl}</span><div class="bar-track"><div class="bar-fill ${k==='won'?'g':''}" style="width:${pct(n,L.length)}%"></div></div><b class="small">${n}</b></div>`; }).join('')}</div></div></div>`;
+};
+
+/* ---------- Clients (super admin) */
+PAGES.clients = () => {
+  const totEx = S.profiles.filter(p=>p.role==='executive').length;
+  return `<div class="kpis"><div class="kpi dark"><div class="k-label">Clients</div><div class="k-val">${S.orgs.length}</div><div class="k-sub">${S.orgs.filter(o=>o.active).length} active</div></div>
+    <div class="kpi"><div class="k-label">Executive logins</div><div class="k-val">${totEx}</div></div><div class="kpi"><div class="k-label">Leads managed</div><div class="k-val">${S.leads.length}</div></div>
+    <div class="kpi"><div class="k-label">Leads today</div><div class="k-val">${S.leads.filter(l=>isToday(l.created_at)).length}</div></div></div>
+  <div class="panel-h"><h3>All clients</h3><span class="spacer"></span><button class="btn btn-primary btn-sm" data-act="add-client">${ic('plus','width="15"')} New client</button></div>
+  ${S.orgs.length?`<div class="table-wrap"><table class="t cards"><thead><tr><th>Client</th><th>Admin login</th><th>Plan</th><th>Executives</th><th>Leads</th><th>Since</th><th>Active</th><th></th></tr></thead><tbody>
+  ${S.orgs.map(o=>{ const ad=S.profiles.find(p=>p.org_id===o.id&&p.role==='client_admin'); return `<tr><td><div class="name">${h(o.name)}</div><div class="sub">${h(o.contact_name||'')} ${o.phone?'· '+h(o.phone):''}</div></td>
+    <td data-l="Login" class="small">${h(ad?.email||o.email||'—')}</td><td data-l="Plan"><span class="tag">${h(o.plan)}</span></td><td data-l="Executives">${execs(o.id).length} / ${o.max_executives}</td>
+    <td data-l="Leads">${S.leads.filter(l=>l.org_id===o.id).length}</td><td data-l="Since" class="small">${fmtDate(o.created_at)}</td>
+    <td data-l="Active"><label class="switch"><input type="checkbox" data-act="toggle-org" data-id="${o.id}" ${o.active?'checked':''}><span></span></label></td>
+    <td class="nowrap"><button class="btn btn-ghost btn-xs" data-act="edit-client" data-id="${o.id}">Edit</button> <button class="btn btn-primary btn-xs" data-act="pick-org" data-id="${o.id}">Open →</button></td></tr>`; }).join('')}
+  </tbody></table></div>`:`<div class="panel empty"><h4>No clients yet</h4><p>Create a client to give them their own CRM login.</p></div>`}
+  <div class="note" style="margin-top:14px">Turning a client <b>off</b> pauses auto-distribution for them. To block their logins, switch off their admin and executives too, or ask me to add a full lock.</div>`;
+};
+
+/* ========================================================= LEAD DRAWER */
+async function openLead(id){
+  const l = S.leads.find(x=>x.id===id); if(!l) return; S.openLead=id;
+  $$('.overlay,.drawer').forEach(e=>e.remove());
+  const ownerSel = canManage() ? `<div class="field"><label>Lead owner</label><select class="input" data-lead="assigned_to"><option value="">Unassigned</option>${execs(l.org_id).map(e=>`<option value="${e.id}" ${l.assigned_to===e.id?'selected':''}>${h(e.full_name)}${e.active?'':' (off)'}</option>`).join('')}</select></div>` : '';
+  const fuVal = l.next_followup ? new Date(Date.parse(l.next_followup)-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16) : '';
+  document.body.insertAdjacentHTML('beforeend', `<div class="overlay" data-act="close"></div><aside class="drawer">
+    <div class="drawer-h"><span class="avatar">${initials(l.name)}</span><div style="flex:1;min-width:0"><h3 style="font-size:19px">${h(l.name||'(no name)')}</h3><div class="row" style="gap:8px;margin-top:4px">${statusPill(l.status)}<span class="tag">${h(l.source||'Manual')}</span>${isSuper()&&!S.org?`<span class="tag">${h(orgName(l.org_id))}</span>`:''}</div></div><button class="icon-btn" data-act="close">${ic('x','width="16"')}</button></div>
+    <div class="drawer-b">
+      <div class="actions">
+        <a class="act" href="tel:${h(l.phone)}" data-act="log-call" data-id="${l.id}">${ic('phone')}Call</a>
+        <a class="act" href="https://wa.me/${waNum(l.phone)}" target="_blank" rel="noopener" data-act="log-wa" data-id="${l.id}">${ic('wa')}WhatsApp</a>
+        <a class="act" href="mailto:${h(l.email)}" data-act="log-mail" data-id="${l.id}">${ic('mail')}Email</a></div>
+      <div class="section-t">Lead status</div>
+      <div class="status-grid">${STATUSES.map(([k,lbl])=>`<span class="pill s-${k} ${l.status===k?'sel':''}" data-act="set-status" data-v="${k}">${lbl}</span>`).join('')}</div>
+      <div class="section-t">Next follow-up</div>
+      <div class="row"><input class="input" type="datetime-local" style="flex:1;min-width:200px" value="${fuVal}" data-act="fu-set">
+        <button class="btn btn-ghost btn-xs" data-act="fu-quick" data-v="2h">+2 hrs</button><button class="btn btn-ghost btn-xs" data-act="fu-quick" data-v="tm">Tomorrow 11am</button><button class="btn btn-ghost btn-xs" data-act="fu-quick" data-v="3d">+3 days</button>${l.next_followup?'<button class="btn btn-ghost btn-xs" data-act="fu-quick" data-v="clear">Clear</button>':''}</div>
+      <div class="section-t">Add a note</div>
+      <textarea class="input" id="note" rows="3" placeholder="What happened on the call? Next step?"></textarea>
+      <div class="row" style="margin-top:8px"><span class="spacer"></span><button class="btn btn-primary btn-sm" data-act="add-note">Save note</button></div>
+      <div class="section-t">Details</div>
+      <form data-form="lead-details">${ownerSel}
+        <div class="grid2"><div class="field"><label>Name</label><input class="input" name="name" value="${h(l.name)}"></div><div class="field"><label>Mobile</label><input class="input" name="phone" value="${h(l.phone)}"></div>
+        <div class="field"><label>Email</label><input class="input" name="email" value="${h(l.email)}"></div><div class="field"><label>City</label><input class="input" name="city" value="${h(l.city)}"></div>
+        <div class="field"><label>Deal value (₹)</label><input class="input" name="deal_value" type="number" min="0" value="${h(l.deal_value??'')}"></div><div class="field"><label>Entry date</label><input class="input" disabled value="${fmtDT(l.created_at)}"></div></div>
+        ${Object.keys(l.extra||{}).filter(k=>!['name','phone','email','city','fields'].includes(k)).length?`<div class="small muted" style="margin-bottom:10px">${Object.entries(l.extra).filter(([k])=>!['name','phone','email','city','fields'].includes(k)).slice(0,10).map(([k,v])=>`<div><b>${h(k)}:</b> ${h(typeof v==='object'?JSON.stringify(v):v)}</div>`).join('')}</div>`:''}
+        <div class="row"><span class="spacer"></span><button class="btn btn-ghost btn-sm" type="submit">Save details</button></div></form>
+      <div class="section-t">Timeline</div><div class="timeline" id="tl"><div class="spinner" style="margin:20px auto"></div></div>
+    </div></aside>`);
+  const acts = await api.listActivities(id);
+  const tl=$('#tl'); if (tl) tl.innerHTML = acts.map(a=>`<div class="tl"><span class="ic">${ic(ACT_ICON[a.kind]||'note')}</span><div><div>${a.kind==='note'?`<b>${h(a.user_name)}:</b> `:''}${h(a.body)}</div><div class="small muted">${a.kind!=='note'?h(a.user_name)+' · ':''}${fmtDT(a.created_at)}</div></div></div>`).join('') || '<p class="muted small">No activity yet.</p>';
+}
+async function patchLead(patch, msg){ const id=S.openLead; const upd = await api.updateLead(id, patch); const i=S.leads.findIndex(x=>x.id===id); if(i>=0) S.leads[i]={...S.leads[i], ...upd}; if(msg) toast(msg); render(); await openLead(id); }
+async function logAct(id, kind, body){ try { await api.addActivity(id, kind, body); const l=S.leads.find(x=>x.id===id); if(l && l.status==='new' && kind!=='note'){ const u=await api.updateLead(id,{status:'contacted'}); Object.assign(l,u); } l && (l.updated_at=new Date().toISOString()); if(S.openLead===id) openLead(id); else render(); } catch(e){ toast(e.message,true); } }
+
+/* ================================================================ MODALS */
+function addLeadModal(){
+  if (isSuper() && !S.org) return openModal(`<h3>Choose a client first</h3><p class="muted">Pick a client in the Workspace switcher, then add the lead.</p><div class="modal-f"><button class="btn btn-primary" data-act="close">OK</button></div>`);
+  openModal(`<h3>Add a lead</h3><p class="muted" style="margin-bottom:16px">${isExec()?'It will be assigned to you.':'Leave owner on Auto to use round-robin.'}</p>
+  <form data-form="add-lead"><div class="grid2"><div class="field"><label>Name <span class="req">*</span></label><input class="input" name="name" required></div><div class="field"><label>Mobile <span class="req">*</span></label><input class="input" name="phone" required inputmode="tel"></div>
+  <div class="field"><label>Email</label><input class="input" name="email" type="email"></div><div class="field"><label>City</label><input class="input" name="city"></div>
+  <div class="field"><label>Source</label><input class="input" name="source" value="Manual" list="srcl"><datalist id="srcl">${[...new Set(scopedLeads().map(l=>l.source))].map(s=>`<option value="${h(s)}">`).join('')}</datalist></div>
+  ${canManage()?`<div class="field"><label>Owner</label><select class="input" name="owner"><option value="auto">Auto (round-robin)</option><option value="none">Unassigned</option>${execs(curOrgId(),true).map(e=>`<option value="${e.id}">${h(e.full_name)}</option>`).join('')}</select></div>`:''}</div>
+  <div class="field"><label>Note</label><textarea class="input" name="notes" rows="2"></textarea></div>
+  <div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" type="submit">Add lead</button></div></form>`);
+}
+function execModal(){ openModal(`<h3>Add a sales executive</h3><p class="muted" style="margin-bottom:16px">They sign in with this email and password and see only the leads assigned to them.</p>
+  <form data-form="add-exec"><div class="field"><label>Full name <span class="req">*</span></label><input class="input" name="full_name" required></div>
+  <div class="grid2"><div class="field"><label>Email (login) <span class="req">*</span></label><input class="input" name="email" type="email" required></div><div class="field"><label>Mobile</label><input class="input" name="phone"></div></div>
+  <div class="field"><label>Password <span class="req">*</span></label><input class="input" name="password" type="text" minlength="8" required value="${genPw()}"><span class="small muted">Share this with the executive. They can't change it themselves yet; you can reset it anytime.</span></div>
+  <div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" type="submit">Create login</button></div></form>`); }
+const genPw = () => 'Crm@' + Math.random().toString(36).slice(2,8) + Math.floor(10+Math.random()*89);
+function clientModal(o){ openModal(o ? `<h3>Edit ${h(o.name)}</h3><form data-form="edit-client" data-id="${o.id}" style="margin-top:14px">
+  <div class="field"><label>Company name</label><input class="input" name="name" value="${h(o.name)}"></div>
+  <div class="grid2"><div class="field"><label>Plan</label><input class="input" name="plan" value="${h(o.plan)}"></div><div class="field"><label>Max executives</label><input class="input" name="max_executives" type="number" min="0" value="${o.max_executives}"></div>
+  <div class="field"><label>Contact name</label><input class="input" name="contact_name" value="${h(o.contact_name)}"></div><div class="field"><label>Phone</label><input class="input" name="phone" value="${h(o.phone)}"></div></div>
+  <div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" type="submit">Save</button></div></form>`
+  : `<h3>New client</h3><p class="muted" style="margin-bottom:16px">Creates their company workspace and the owner's admin login. They can then add their own sales executives.</p>
+  <form data-form="add-client"><div class="field"><label>Company name <span class="req">*</span></label><input class="input" name="company" required></div>
+  <div class="grid2"><div class="field"><label>Owner / contact name <span class="req">*</span></label><input class="input" name="contact_name" required></div><div class="field"><label>Mobile</label><input class="input" name="phone"></div>
+  <div class="field"><label>Login email <span class="req">*</span></label><input class="input" name="email" type="email" required></div><div class="field"><label>Password <span class="req">*</span></label><input class="input" name="password" minlength="8" required value="${genPw()}"></div>
+  <div class="field"><label>Plan name</label><input class="input" name="plan" value="standard"></div><div class="field"><label>Max executives</label><input class="input" name="max_executives" type="number" min="1" value="10"></div></div>
+  <div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" type="submit">Create client</button></div></form>`); }
+function srcModal(){ openModal(`<h3>New lead source</h3><p class="muted" style="margin-bottom:16px">You get a unique webhook URL to paste into your form, ad tool or automation.</p>
+  <form data-form="add-src"><div class="field"><label>Name <span class="req">*</span></label><input class="input" name="name" required placeholder="e.g. Facebook — Diwali offer"></div>
+  <div class="field"><label>Type</label><select class="input" name="kind">${SOURCE_KINDS.map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></div>
+  <div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" type="submit">Create source</button></div></form>`); }
+function srcHelp(s){ const u=hookURL(s.api_key);
+  openModal(`<h3>Connect “${h(s.name)}”</h3><p class="muted">Send a <b>POST</b> request with the lead's details to this URL. Field names are detected automatically (name, phone/mobile, email, city). Any extra fields are saved on the lead too.</p>
+  <div class="copy-row" style="margin:12px 0"><input class="input" readonly value="${h(u)}"><button class="icon-btn" data-act="copy" data-v="${h(u)}">${ic('copy','width="15"')}</button></div>
+  <div class="section-t">Elementor / WordPress form</div><p class="small">Form → Actions After Submit → add <b>Webhook</b> → paste the URL above. Done.</p>
+  <div class="section-t">Facebook / Google lead ads</div><p class="small">In Pabbly Connect, Zapier or Make: trigger <i>New Lead</i> → action <i>Webhook / HTTP POST</i> → this URL, JSON body with name, phone, email.</p>
+  <div class="section-t">IndiaMART / TradeIndia / JustDial</div><p class="small">Use their CRM-integration “Push API” or a Pabbly flow pointing to this URL.</p>
+  <div class="section-t">Any website (HTML)</div><div class="code">${h(`<form id="lead-form">
+  <input name="name" placeholder="Name" required>
+  <input name="phone" placeholder="Mobile" required>
+  <input name="email" placeholder="Email">
+  <button>Submit</button>
+</form>
+<script>
+document.getElementById('lead-form').onsubmit = async e => {
+  e.preventDefault();
+  await fetch('${u}', { method:'POST', body:new FormData(e.target) });
+  e.target.reset(); alert('Thanks! We will call you shortly.');
+};
+</`+`script>`)}</div>
+  <div class="section-t">Test from a terminal</div><div class="code">${h(`curl -X POST '${u}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{"name":"Test Lead","phone":"9876543210","city":"Delhi"}'`)}</div>
+  <div class="modal-f"><button class="btn btn-primary" data-act="close">Close</button></div>`, true); }
+function campModal(){
+  const srcs=[...new Set(scopedLeads().map(l=>l.source).filter(Boolean))];
+  openModal(`<h3>New campaign</h3><p class="muted" style="margin-bottom:16px">Pick who receives it and write the message. Use {name}, {city} or {owner} to personalise it.</p>
+  <form data-form="add-camp"><div class="grid2"><div class="field"><label>Campaign name <span class="req">*</span></label><input class="input" name="name" required placeholder="Diwali offer follow-up"></div>
+  <div class="field"><label>Channel</label><select class="input" name="channel" data-act="camp-aud"><option value="whatsapp">WhatsApp</option><option value="sms">SMS</option><option value="email">Email</option></select></div>
+  <div class="field"><label>Lead status</label><select class="input" name="status" data-act="camp-aud"><option value="">Any status</option>${STATUSES.map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></div>
+  <div class="field"><label>Source</label><select class="input" name="source" data-act="camp-aud"><option value="">Any source</option>${srcs.map(s=>`<option>${h(s)}</option>`).join('')}</select></div>
+  <div class="field"><label>Owner</label><select class="input" name="owner" data-act="camp-aud"><option value="">Anyone</option>${execs().map(e=>`<option value="${e.id}">${h(e.full_name)}</option>`).join('')}</select></div>
+  <div class="field"><label>Email subject</label><input class="input" name="subject" placeholder="(email only)"></div></div>
+  <div class="field"><label>Message <span class="req">*</span></label><textarea class="input" name="message" rows="4" required>Hi {name}, thanks for your interest! We have a special offer this week. Reply YES and {owner} will call you with details.</textarea></div>
+  <div class="note" id="aud-count">Calculating audience…</div>
+  <div class="modal-f"><button type="button" class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" type="submit">Create campaign</button></div></form>`);
+  updAud();
+}
+function updAud(){ const f=$('form[data-form="add-camp"]'); if(!f) return; const a=Object.fromEntries(new FormData(f)); const n=audienceOf(a).length; $('#aud-count').innerHTML=`<b>${n}</b> lead${n===1?'':'s'} will receive this${a.channel==='email'?' (only leads with an email)':''}.`; }
+function campView(c){
+  const sent=new Set(c.audience.sent_ids||[]); const ids=c.audience.ids||[]; const L=ids.map(id=>S.leads.find(l=>l.id===id)).filter(Boolean);
+  const link = l => { const m=fillMsg(c.message,l); return c.channel==='whatsapp' ? `https://wa.me/${waNum(l.phone)}?text=${encodeURIComponent(m)}` : c.channel==='sms' ? `sms:${l.phone}?body=${encodeURIComponent(m)}` : `mailto:${l.email}?subject=${encodeURIComponent(c.subject||c.name)}&body=${encodeURIComponent(m)}`; };
+  openModal(`<div class="row"><h3>${h(c.name)}</h3><span class="spacer"></span><button class="icon-btn" data-act="close">${ic('x','width="16"')}</button></div>
+  <p class="muted small">${h({whatsapp:'WhatsApp',sms:'SMS',email:'Email'}[c.channel])} · ${sent.size} of ${ids.length} sent</p><div class="progress"><span style="width:${pct(sent.size,ids.length)}%"></span></div>
+  <div class="code" style="white-space:pre-wrap;margin-bottom:14px">${h(c.message)}</div>
+  <div class="row" style="margin-bottom:10px"><button class="btn btn-ghost btn-sm" data-act="camp-export" data-id="${c.id}">${ic('dl','width="15"')} Export list (CSV)</button>${L.find(l=>!sent.has(l.id))?`<a class="btn btn-green btn-sm" target="_blank" rel="noopener" href="${h(link(L.find(l=>!sent.has(l.id))))}" data-act="camp-send" data-c="${c.id}" data-id="${L.find(l=>!sent.has(l.id)).id}">Send next →</a>`:'<span class="pill s-won">All sent</span>'}<span class="spacer"></span><button class="btn btn-danger btn-xs" data-act="camp-del" data-id="${c.id}">Delete campaign</button></div>
+  <div class="table-wrap" style="max-height:340px;overflow-y:auto"><table class="t"><tbody>${L.map(l=>`<tr><td><div class="name">${h(l.name)}</div><div class="sub">${h(c.channel==='email'?l.email:l.phone)}</div></td><td>${statusPill(l.status)}</td><td style="text-align:right">${sent.has(l.id)?'<span class="pill s-won">Sent</span>':`<a class="btn btn-ghost btn-xs" target="_blank" rel="noopener" href="${h(link(l))}" data-act="camp-send" data-c="${c.id}" data-id="${l.id}">Send</a>`}</td></tr>`).join('')}</tbody></table></div>`, true);
+}
+
+/* ================================================================ EVENTS */
+const A = {}; // click actions
+A.close = () => closeLayer();
+A.nav = async el => { $('#sidebar')?.classList.remove('open'); closeLayer(); if (el.dataset.page==='clients' && S.org){ S.org=''; go('clients'); await loadAll(); return; } go(el.dataset.page); };
+A.menu = () => $('#sidebar').classList.toggle('open');
+A.logout = async () => { await api.signOut(); S.me=null; S.org=''; closeLayer(); render(); };
+A['demo-login'] = async el => { S.me = await api.demoLogin(el.dataset.id); S.page='dashboard'; await loadAll(); };
+A['reset-demo'] = (el,e) => { e.preventDefault(); api.reset(); toast('Demo data reset'); render(); };
+A['pick-org'] = async el => { closeLayer(); S.org = el.dataset.id; if (S.page==='clients') S.page='dashboard'; S.f.page=1; await loadAll(); };
+A['add-lead'] = () => addLeadModal();
+A['open-lead'] = (el,e) => { if (e.target.closest('[data-stop]')) return; openLead(el.dataset.id); };
+A.fstatus = el => { S.f.status=el.dataset.v; S.f.page=1; render(); };
+A.pg = el => { S.f.page += +el.dataset.d; render(); };
+A.sel = el => { el.checked ? S.sel.add(el.dataset.id) : S.sel.delete(el.dataset.id); render(); };
+A['sel-all'] = el => { const f=S.f; const rows=filteredLeads().slice((f.page-1)*f.size, f.page*f.size); rows.forEach(r=> el.checked ? S.sel.add(r.id) : S.sel.delete(r.id)); render(); };
+A['bulk-clear'] = () => { S.sel.clear(); render(); };
+A['bulk-delete'] = async el => { if(!await ask({ title:`Delete ${S.sel.size} leads?`, body:'They are removed permanently with their notes and history.', confirm:'Delete leads', danger:true })) return; await busy(null, async()=>{ await api.deleteLeads([...S.sel]); S.leads=S.leads.filter(l=>!S.sel.has(l.id)); toast(`${S.sel.size} leads deleted`); S.sel.clear(); render(); }); };
+A['export-leads'] = () => { const L=filteredLeads(); download(`leads-${new Date().toISOString().slice(0,10)}.csv`, toCSV([['Name','Mobile','Email','City','Status','Owner','Source','Entry date','Next follow-up','Deal value'], ...L.map(l=>[l.name,l.phone,l.email,l.city,STATUS_LABEL[l.status],pname(l.assigned_to),l.source,fmtDT(l.created_at),l.next_followup?fmtDT(l.next_followup):'',l.deal_value||''])])); };
+A['fu-tab'] = el => { S.fu=el.dataset.v; render(); };
+A['log-call'] = el => logAct(el.dataset.id,'call','Called '+(S.leads.find(l=>l.id===el.dataset.id)?.phone||''));
+A['log-wa'] = el => logAct(el.dataset.id,'whatsapp','Opened WhatsApp chat');
+A['log-mail'] = el => logAct(el.dataset.id,'email','Opened email');
+A['set-status'] = async el => { const v=el.dataset.v; const patch={status:v}; if(v==='follow_up' && !S.leads.find(l=>l.id===S.openLead)?.next_followup){ const d=new Date(); d.setDate(d.getDate()+1); d.setHours(11,0,0,0); patch.next_followup=d.toISOString(); }
+  try { await patchLead(patch, v==='won' ? 'Marked as won. Add the deal value under Details.' : 'Status updated'); if(v==='won') $('[name=deal_value]')?.focus(); } catch(e){ toast(e.message,true); } };
+A['fu-quick'] = async el => { const v=el.dataset.v; let d=new Date(); if(v==='2h') d=new Date(Date.now()+2*3600e3); else if(v==='tm'){ d.setDate(d.getDate()+1); d.setHours(11,0,0,0);} else if(v==='3d'){ d.setDate(d.getDate()+3); d.setHours(11,0,0,0);}
+  try { await patchLead({ next_followup: v==='clear' ? null : d.toISOString() }, v==='clear'?'Follow-up cleared':'Follow-up set for '+fmtDT(d)); } catch(e){ toast(e.message,true); } };
+A['add-note'] = async el => { const t=$('#note').value.trim(); if(!t) return; await busy(el, async()=>{ await api.addActivity(S.openLead,'note',t); const l=S.leads.find(x=>x.id===S.openLead); if(l) l.updated_at=new Date().toISOString(); toast('Note saved'); await openLead(S.openLead); }); };
+A['use-paste'] = () => { const t=$('#paste').value; if(!t.trim()) return toast('Paste some rows first', true); startMapping(parseCSV(t)); };
+A['sample-csv'] = () => download('sample-leads.csv', toCSV([['Name','Mobile','Email','City'],['Rahul Sharma','9876543210','rahul@gmail.com','New Delhi'],['Priya Verma','9812345678','priya@gmail.com','Gurugram'],['Amit Gupta','9898989898','','Noida']]));
+A['up-back'] = () => { S.up={step:1}; render(); };
+A['up-reset'] = () => { S.up={step:1}; render(); };
+A['up-import'] = async el => {
+  const u=S.up; if (u.map.phone==='' || u.map.phone==null) return toast('Please choose the Mobile column', true);
+  const existing=new Set(scopedLeads().map(l=>String(l.phone||'').replace(/\D/g,'').slice(-10)).filter(Boolean)); const seen=new Set(); let skipped=0; const rows=[];
+  for (const r of u.rows){ const m=mapRow(r); const key=m.phone.replace(/\D/g,'').slice(-10); if(!key && !m.email){ skipped++; continue; } if(u.dedupe && key && (existing.has(key)||seen.has(key))){ skipped++; continue; } seen.add(key); rows.push(m); }
+  if (!rows.length) return toast('Nothing to import: all rows were duplicates or had no mobile number', true);
+  await busy(el, async()=>{ const mode = u.mode==='one' ? (u.target||'auto') : u.mode; const leads = await api.insertLeads(curOrgId(), rows, mode);
+    S.up = { step:3, result:{ leads, skipped } }; await refreshLeads(); S.orgs = await api.listOrgs(); render(); });
+};
+A['add-exec'] = () => execModal();
+A['view-exec-leads'] = el => { S.f={ ...S.f, owner:el.dataset.id, status:'', q:'', range:'all', page:1 }; go('leads'); };
+A['reset-pw'] = async el => { const p=await ask({ title:'Reset password', body:'New password for <b>'+h(pname(el.dataset.id))+'</b> (8+ characters). Share it with them after saving.', confirm:'Save password', input:genPw() }); if(!p) return; try { await api.resetPassword(el.dataset.id, p); toast('Password updated. Share it with them.'); } catch(e){ toast(e.message,true); } };
+A.distribute = async el => busy(el, async()=>{ const n=await api.distributeUnassigned(curOrgId()); await refreshLeads(); S.orgs=await api.listOrgs(); toast(`${n} leads distributed`); render(); });
+A['add-src'] = () => srcModal();
+A['src-help'] = el => srcHelp(S.sources.find(s=>s.id===el.dataset.id));
+A['del-src'] = async el => { if(!await ask({ title:'Remove this source?', body:'Its webhook URL stops working straight away. Leads already captured stay in the CRM.', confirm:'Remove source', danger:true })) return; await api.deleteSource(el.dataset.id); S.sources=S.sources.filter(s=>s.id!==el.dataset.id); render(); };
+A['test-src'] = async el => busy(el, async()=>{ const s=S.sources.find(x=>x.id===el.dataset.id); const fn=['Test','Demo','Sample'][Math.floor(Math.random()*3)];
+  await api.simulateWebhook(s, { name:fn+' Lead '+Math.floor(Math.random()*900+100), phone:'9'+Math.floor(100000000+Math.random()*899999999), city:'New Delhi' }); await refreshLeads(); S.orgs=await api.listOrgs();
+  const l=S.leads.filter(x=>x.source===s.name).sort((a,b)=>b.created_at.localeCompare(a.created_at))[0]; toast(`Test lead received → assigned to ${pname(l?.assigned_to)}`); render(); });
+A.copy = el => { navigator.clipboard?.writeText(el.dataset.v).then(()=>toast('Copied'), ()=>toast('Copy failed', true)); };
+A['new-camp'] = () => campModal();
+A['open-camp'] = el => campView(S.campaigns.find(c=>c.id===el.dataset.id));
+A['camp-send'] = async el => { const c=S.campaigns.find(x=>x.id===el.dataset.c); const ids=new Set(c.audience.sent_ids||[]); ids.add(el.dataset.id); c.audience={...c.audience, sent_ids:[...ids]}; c.sent=ids.size; if(ids.size>=c.total) c.status='sent'; else c.status='sending';
+  try { await api.updateCampaign(c.id, { audience:c.audience, sent:c.sent, status:c.status }); await api.addActivity(el.dataset.id, c.channel==='email'?'email':'whatsapp', `Campaign “${c.name}” sent via ${c.channel}`); } catch(e){ toast(e.message,true); }
+  setTimeout(()=>campView(c), 300); };
+A['camp-export'] = el => { const c=S.campaigns.find(x=>x.id===el.dataset.id); const L=(c.audience.ids||[]).map(id=>S.leads.find(l=>l.id===id)).filter(Boolean); download(`campaign-${c.name.replace(/\W+/g,'-')}.csv`, toCSV([['Name','Mobile','Email','Message'], ...L.map(l=>[l.name,l.phone,l.email,fillMsg(c.message,l)])])); };
+A['camp-del'] = async el => { if(!await ask({ title:'Delete this campaign?', body:'The leads stay. Only the campaign and its send progress are removed.', confirm:'Delete campaign', danger:true })) return; await api.deleteCampaign(el.dataset.id); S.campaigns=S.campaigns.filter(c=>c.id!==el.dataset.id); closeLayer(); render(); };
+A['export-rep'] = () => download('executive-report.csv', toCSV([['Executive','Leads','Open','Worked','Interested','Follow-up','Won','Lost','Conversion %','Overdue','Won value'], ...(S._repRows||[]).map(r=>[r.e.full_name,r.n,r.open,r.worked,r.int,r.fu,r.won,r.lost,pct(r.won,r.n),r.od,r.val])]));
+A['add-client'] = () => clientModal();
+A['edit-client'] = el => clientModal(S.orgs.find(o=>o.id===el.dataset.id));
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el) return;
+  const fn = A[el.dataset.act]; if (!fn) return;
+  if (el.tagName==='SELECT' || el.type==='checkbox' || el.type==='radio' || el.type==='file' || el.type==='datetime-local') return; // handled on change
+  if (el.tagName==='A' && el.getAttribute('href')==='#') e.preventDefault();
+  if (el.tagName!=='A' && el.tagName!=='LABEL' && el.type!=='checkbox') e.preventDefault();
+  if (el.closest('[data-stop]') && el.dataset.act==='open-lead') return;
+  if (el.closest('tr[data-act="open-lead"]') && el !== el.closest('tr')) e.stopPropagation();
+  fn(el, e);
+});
+document.addEventListener('change', async e => {
+  const el=e.target; const act=el.dataset.act;
+  if (el.dataset.f) { S.f[el.dataset.f] = el.dataset.f==='size' ? +el.value : el.value; S.f.page=1; render(); return; }
+  if (el.dataset.upMap) { S.up.map[el.dataset.upMap] = el.value; render(); return; }
+  if (el.dataset.up) { S.up[el.dataset.up] = el.type==='checkbox' ? el.checked : el.value; render(); return; }
+  if (el.dataset.lead==='assigned_to') { try { await patchLead({ assigned_to: el.value||null }, 'Lead re-assigned'); } catch(err){ toast(err.message,true); } return; }
+  if (!act) return;
+  if (act==='sel' || act==='sel-all') return A[act](el, e);
+  if (act==='ws') { S.org=el.value; S.f.page=1; S.sel.clear(); S.up={step:1}; await loadAll(); return; }
+  if (act==='file' && el.files[0]) return readFile(el.files[0]);
+  if (act==='bulk-assign' && el.value) { const ids=[...S.sel]; try { for (const id of ids) { const u=await api.updateLead(id,{assigned_to:el.value}); Object.assign(S.leads.find(l=>l.id===id), u); } toast(`${ids.length} leads assigned to ${pname(el.value)}`); S.sel.clear(); render(); } catch(err){ toast(err.message,true); } return; }
+  if (act==='bulk-status' && el.value) { const ids=[...S.sel]; try { for (const id of ids) { const u=await api.updateLead(id,{status:el.value}); Object.assign(S.leads.find(l=>l.id===id), u); } toast(`${ids.length} leads updated`); S.sel.clear(); render(); } catch(err){ toast(err.message,true); } return; }
+  if (act==='fu-set' && el.value) { try { await patchLead({ next_followup:new Date(el.value).toISOString() }, 'Follow-up saved'); } catch(err){ toast(err.message,true); } return; }
+  if (act==='toggle-auto') { const o=curOrg(); try { await api.updateOrg(o.id,{auto_assign:el.checked}); o.auto_assign=el.checked; toast('Auto-distribution '+(el.checked?'on':'off')); render(); } catch(err){ toast(err.message,true); } return; }
+  if (act==='toggle-user') { try { await api.setActive(el.dataset.id, el.checked); person(el.dataset.id).active=el.checked; toast(el.checked?'Executive activated':'Executive deactivated'); render(); } catch(err){ toast(err.message,true); el.checked=!el.checked; } return; }
+  if (act==='toggle-org') { try { await api.updateOrg(el.dataset.id,{active:el.checked}); S.orgs.find(o=>o.id===el.dataset.id).active=el.checked; render(); } catch(err){ toast(err.message,true); } return; }
+  if (act==='toggle-src') { try { await api.updateSource(el.dataset.id,{active:el.checked}); S.sources.find(s=>s.id===el.dataset.id).active=el.checked; } catch(err){ toast(err.message,true); } return; }
+  if (act==='rep-range') { S.rep=el.value; render(); return; }
+  if (act==='camp-aud') return updAud();
+});
+let qT; document.addEventListener('input', e => { if (e.target.dataset.f==='q') { clearTimeout(qT); const v=e.target.value; qT=setTimeout(()=>{ S.f.q=v; S.f.page=1; render(); const i=$('[data-f="q"]'); if(i){ i.focus(); i.setSelectionRange(v.length,v.length);} }, 250); } });
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeLayer(); });
+document.addEventListener('dragover', e => { const d=e.target.closest?.('#drop'); if(d){ e.preventDefault(); d.classList.add('drag'); } });
+document.addEventListener('dragleave', e => { e.target.closest?.('#drop')?.classList.remove('drag'); });
+document.addEventListener('drop', e => { const d=e.target.closest?.('#drop'); if(d){ e.preventDefault(); d.classList.remove('drag'); const f=e.dataTransfer.files[0]; if(f) readFile(f); } });
+
+document.addEventListener('submit', async e => {
+  const f=e.target; const kind=f.dataset.form; if(!kind) return; e.preventDefault();
+  if (kind==='ask'){ const m=f.closest('.modal'); const r=m._res; m._res=null; const v=$('#ask-in') ? $('#ask-in').value : true; closeLayer(); r && r(v); return; }
+  const d=Object.fromEntries(new FormData(f)); const btn=f.querySelector('[type=submit]');
+  if (kind==='login') return busy(btn, async()=>{ S.me = await api.signIn(d.email.trim(), d.password); S.page=(location.hash.replace(/^#\/?/,'')||'dashboard'); await loadAll(); });
+  if (kind==='add-lead') return busy(btn, async()=>{ const mode = isExec() ? 'auto' : (d.owner||'auto'); const [l] = await api.insertLeads(curOrgId(), [{ name:d.name, phone:d.phone.replace(/[^\d+]/g,''), email:d.email, city:d.city, source:d.source||'Manual', notes:d.notes }], mode);
+    if (d.notes) await api.addActivity(l.id,'note',d.notes); await refreshLeads(); S.orgs=await api.listOrgs(); closeLayer(); toast(l.assigned_to ? `Lead added → ${pname(l.assigned_to)}` : 'Lead added (unassigned)'); render(); });
+  if (kind==='lead-details') return busy(btn, async()=>{ await patchLead({ name:d.name, phone:d.phone, email:d.email||null, city:d.city||null, deal_value: d.deal_value===''?null:+d.deal_value }, 'Details saved'); });
+  if (kind==='add-exec') return busy(btn, async()=>{ await api.createExecutive({ ...d, org_id:curOrgId() }); S.profiles = await api.listProfiles(isSuper()?'':curOrgId()); closeLayer(); toast(`Login created for ${d.full_name}`); render();
+    openModal(`<h3>Login ready ✓</h3><p class="muted">Share these details with <b>${h(d.full_name)}</b>:</p><div class="code" style="margin:12px 0">${h(`CRM link: ${location.href.split('#')[0]}\nEmail:    ${d.email}\nPassword: ${d.password}`)}</div><div class="modal-f"><button class="btn btn-ghost" data-act="copy" data-v="${h(`CRM link: ${location.href.split('#')[0]}\nEmail: ${d.email}\nPassword: ${d.password}`)}">Copy</button><button class="btn btn-primary" data-act="close">Done</button></div>`); });
+  if (kind==='add-client') return busy(btn, async()=>{ const o = await api.createClient(d); closeLayer(); toast(`${d.company} created`); await loadAll();
+    openModal(`<h3>${h(d.company)} is ready ✓</h3><p class="muted">Send these login details to <b>${h(d.contact_name)}</b>. They can add their sales team from <i>Team</i>.</p><div class="code" style="margin:12px 0">${h(`CRM link: ${location.href.split('#')[0]}\nEmail:    ${d.email}\nPassword: ${d.password}`)}</div><div class="modal-f"><button class="btn btn-ghost" data-act="copy" data-v="${h(`CRM link: ${location.href.split('#')[0]}\nEmail: ${d.email}\nPassword: ${d.password}`)}">Copy</button><button class="btn btn-primary" data-act="pick-org" data-id="${o.id}">Open workspace →</button></div>`); });
+  if (kind==='edit-client') return busy(btn, async()=>{ await api.updateOrg(f.dataset.id, { name:d.name, plan:d.plan, max_executives:+d.max_executives, contact_name:d.contact_name, phone:d.phone }); S.orgs=await api.listOrgs(); closeLayer(); toast('Client updated'); render(); });
+  if (kind==='add-src') return busy(btn, async()=>{ const s=await api.createSource(curOrgId(), d.name, d.kind); S.sources.push(s); closeLayer(); render(); srcHelp(s); });
+  if (kind==='add-camp') return busy(btn, async()=>{ const L=audienceOf(d); if(!L.length) throw new Error('No leads match this audience');
+    const c = await api.createCampaign({ org_id:curOrgId(), name:d.name, channel:d.channel, subject:d.subject||null, message:d.message, audience:{ status:d.status, source:d.source, owner:d.owner, ids:L.map(l=>l.id), sent_ids:[] }, total:L.length });
+    S.campaigns.unshift(c); closeLayer(); render(); campView(c); });
+});
+
+/* ================================================================ BOOT */
+(async function boot(){
+  $('#app').innerHTML = '<div class="spinner"></div>';
+  const p = location.hash.replace(/^#\/?/,'');
+  try { S.me = await api.session(); } catch(e){ S.me=null; }
+  if (S.me) { if (p) S.page=p; await loadAll(); } else render();
+  window.addEventListener('hashchange', () => { const p=location.hash.replace(/^#\/?/,''); if (S.me && p && p!==S.page){ S.page=p; closeLayer(); render(); } });
+})();
+</script>
+</body>
+</html>
